@@ -10,7 +10,20 @@ const SearchBar: FunctionComponent = () => {
     e.preventDefault();
 
     // @ts-ignore
-    router.push(`/results?q=${e.currentTarget.searchInput.value}`);
+    const searchValue = e.currentTarget.searchInput.value;
+
+    const sh = localStorage.getItem("search_history");
+    if (sh === null) {
+      localStorage.setItem("search_history", JSON.stringify([searchValue]));
+    } else {
+      localStorage.setItem(
+        "search_history",
+        JSON.stringify([...JSON.parse(sh), searchValue])
+      );
+    }
+
+    // @ts-ignore
+    router.push(`/results?q=${searchValue}`);
   };
 
   return (
@@ -36,7 +49,7 @@ const SearchBar: FunctionComponent = () => {
           type="search"
           id="default-search"
           name="searchInput"
-          className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:text-black dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="block p-4 pl-10 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:text-black dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Search Composers, Pieces, and Performers..."
           required
         />

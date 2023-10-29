@@ -42,7 +42,7 @@ export default function Footer() {
             <nav className="mb-10 list-none">
               <li className="mt-3">
                 <Link
-                  href="#"
+                  href="/contribute/concert"
                   className="text-gray-500 cursor-pointer hover:text-gray-900 dark:text-white"
                 >
                   Add Performance

@@ -3,8 +3,8 @@ import Navbar from "./_components/Navbar";
 import { trending_mock } from "./_static/dummy_trending";
 import TrendingRow from "./_components/TrendingRow";
 import Footer from "./_components/Footer";
-import { SyntheticEvent } from "react";
 import SearchBar from "./_components/SearchBar";
+import RecentSearches from "./_components/RecentSearches";
 
 export const metadata: Metadata = {
   title: "ClassicalsLive",
@@ -23,11 +23,15 @@ const Home: NextPage = () => {
         </div>
       </section>
 
-      <section className="mt-4 w-2/3 mx-auto max-h-[300px] overflow-y-scroll overflow-x-hidden">
+      <section className="w-2/3 mx-auto pb-8 pt-2">
+        <RecentSearches />
+      </section>
+
+      <section className="w-2/3 mx-auto overflow-x-hidden">
         <h1 className="font-modern font-bold text-2xl dark:text-white">
           Trending This Week
         </h1>
-        <div className="w-full py-2">
+        <div className="w-full py-2 max-h-[300px] overflow-y-scroll">
           <ul className="flex flex-col gap-y-2">
             {trending_mock.map((item, index) => (
               <TrendingRow {...item} key={index} />
