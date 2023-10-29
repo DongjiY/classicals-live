@@ -50,7 +50,7 @@ export default function Footer() {
               </li>
               <li className="mt-3">
                 <Link
-                  href="#"
+                  href="https://github.com/DongjiY/classicals-live"
                   className="text-gray-500 cursor-pointer hover:text-gray-900 dark:text-white"
                 >
                   Source Code
