@@ -1,7 +1,7 @@
 import { Concert } from "@/types/concert";
 import { FunctionComponent } from "react";
 
-const TrendingRow: FunctionComponent<Concert> = ({
+const ResultRow: FunctionComponent<Concert> = ({
   pieceName,
   group,
   performanceTime,
@@ -53,9 +53,9 @@ const TrendingRow: FunctionComponent<Concert> = ({
       .padStart(2, "0")}${suffix}`;
   };
   return (
-    <li className="p-4 bg-gray-100 rounded flex flex-wrap gap-y-2 justify-between items-baseline dark:bg-gray-600 dark:text-gray-100">
+    <li className="py-5 px-7 bg-white border-2 dark:border-gray-600 dark:bg-gray-700 rounded flex flex-wrap gap-y-2 justify-between items-baseline dark:text-gray-100">
       <div className="flex flex-col">
-        <h2 className="font-semibold text-lg">
+        <h2 className="font-semibold text-lg hover:text-blue-600">
           <a href={originalLink}>{pieceName}</a>
         </h2>
         <p>{group.groupName}</p>
@@ -67,7 +67,7 @@ const TrendingRow: FunctionComponent<Concert> = ({
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className="w-5 h-5"
+            className="w-5 h-5 fill-blue-500"
           >
             <path
               fillRule="evenodd"
@@ -85,7 +85,7 @@ const TrendingRow: FunctionComponent<Concert> = ({
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className="w-5 h-5"
+            className="w-5 h-5 fill-red-500"
           >
             <path
               fillRule="evenodd"
@@ -101,4 +101,4 @@ const TrendingRow: FunctionComponent<Concert> = ({
   );
 };
 
-export default TrendingRow;
+export default ResultRow;

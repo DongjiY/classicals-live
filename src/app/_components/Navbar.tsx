@@ -3,7 +3,7 @@ import Logo from "./Logo";
 
 export default function Navbar() {
   return (
-    <nav className="w-full bg-white border-b-[1px] dark:border-none border-gray-300 py-4 dark:bg-gray-900">
+    <nav className="w-full bg-white border-b-[1px] dark:border-none border-gray-300 py-4 dark:bg-gray-900 z-10">
       <div className="w-2/3 mx-auto flex items-center justify-between">
         <Logo />
 

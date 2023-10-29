@@ -1,5 +1,9 @@
-import { NextPage } from "next";
+import { Metadata, NextPage } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "404 Error",
+};
 
 const NotFound: NextPage = () => {
   return (

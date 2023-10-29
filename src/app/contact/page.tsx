@@ -1,24 +1,28 @@
-import { NextPage } from "next";
+import { Metadata, NextPage } from "next";
 import Navbar from "../_components/Navbar";
 import Footer from "../_components/Footer";
 
+export const metadata: Metadata = {
+  title: "Contact",
+};
+
 const ContactPage: NextPage = () => {
   return (
-    <main className="font-modern">
+    <main className="font-modern min-h-screen">
       <Navbar />
-      <div className="mt-16 mb-16 relative flex items-top justify-center bg-white dark:bg-gray-900 sm:items-center sm:pt-0">
+      <div className="relative h-[70vh] flex items-top justify-center bg-white dark:bg-gray-800 sm:items-center sm:pt-0 m-0">
         <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
           <div className="mt-8 overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="p-6 mr-2 bg-red-100 dark:bg-gray-800 sm:rounded-lg">
+              <div className="p-6 mr-2 bg-red-100 dark:bg-gray-600 sm:rounded-lg">
                 <h1 className="text-4xl sm:text-5xl text-black dark:text-white font-extrabold tracking-tight font-fancy">
                   Get in touch
                 </h1>
-                <p className="text-normal text-lg sm:text-2xl font-medium text-black dark:text-gray-400 mt-2">
+                <p className="text-normal text-lg sm:text-2xl font-medium text-black dark:text-white mt-2">
                   Fill in the form to start a conversation
                 </p>
 
-                <div className="flex items-center mt-4 text-black dark:text-gray-400">
+                <div className="flex items-center mt-4 text-black dark:text-white">
                   <svg
                     fill="none"
                     stroke="currentColor"
@@ -26,7 +30,7 @@ const ContactPage: NextPage = () => {
                     strokeLinejoin="round"
                     strokeWidth="1.5"
                     viewBox="0 0 24 24"
-                    className="w-8 h-8 text-black"
+                    className="w-8 h-8 text-black dark:text-white"
                   >
                     <path
                       strokeLinecap="round"
@@ -40,7 +44,7 @@ const ContactPage: NextPage = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center mt-2 text-black dark:text-gray-400">
+                <div className="flex items-center mt-2 text-black dark:text-white">
                   <svg
                     fill="none"
                     stroke="currentColor"
@@ -48,7 +52,7 @@ const ContactPage: NextPage = () => {
                     strokeLinejoin="round"
                     strokeWidth="1.5"
                     viewBox="0 0 24 24"
-                    className="w-8 h-8 text-black"
+                    className="w-8 h-8 text-black dark:text-white"
                   >
                     <path
                       strokeLinecap="round"
@@ -73,7 +77,7 @@ const ContactPage: NextPage = () => {
                     name="name"
                     id="name"
                     placeholder="Full Name"
-                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:outline-none"
+                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-white text-gray-800 dark:text-white font-semibold focus:outline-none"
                   />
                 </div>
 
@@ -86,7 +90,7 @@ const ContactPage: NextPage = () => {
                     name="email"
                     id="email"
                     placeholder="Email"
-                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:outline-none"
+                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-white dark:text-white text-gray-800 font-semibold focus:outline-none"
                   />
                 </div>
 
@@ -96,7 +100,7 @@ const ContactPage: NextPage = () => {
                   </label>
                   <textarea
                     placeholder="Your message here..."
-                    className="mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-gray-700 text-gray-800 font-semibold focus:outline-none"
+                    className="mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-white dark:text-white text-gray-800 font-semibold focus:outline-none"
                   ></textarea>
                 </div>
 
