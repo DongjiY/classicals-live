@@ -13,10 +13,10 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-    },
-    fontFamily: {
-      fancy: ["Domine", "serif"],
-      modern: ["Red Hat Display", "sans-serif"],
+      fontFamily: {
+        fancy: ["Domine", "serif"],
+        modern: ["Red Hat Display", "sans-serif"],
+      },
     },
   },
   plugins: [],

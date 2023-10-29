@@ -43,7 +43,9 @@ const ResultsRowWrapper: FunctionComponent = () => {
     <>
       <h1 className="mb-4 font-fancy font-bold text-2xl overflow-x-hidden text-ellipsis whitespace-nowrap dark:text-white">
         Results For:{" "}
-        <span className="font-normal">{searchParams.get("q")}</span>
+        <span className="font-light font-modern tracking-wide text-[1.3rem]">
+          {searchParams.get("q")}
+        </span>
       </h1>
       <ul className="flex flex-col gap-y-3">{generateRows()}</ul>
     </>
