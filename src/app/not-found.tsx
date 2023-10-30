@@ -14,7 +14,7 @@ const NotFound: NextPage = () => {
           <p className="text-red-600 font-bold">404 Error</p>
           <h1 className="text-4xl font-fancy font-bold">Page Not Found</h1>
           <pre className="mt-1 text-gray-500 dark:text-gray-400">
-            Sorry, the page you are looking for doesn't exist.
+            Sorry, the page you are looking for doesn&apos;t exist.
           </pre>
           <div className="flex items-center mt-6 gap-x-3">
             <BackButton />

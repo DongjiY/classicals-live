@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { FunctionComponent, SyntheticEvent } from "react";
 
+const MAXLEN = 10;
+
 const SearchBar: FunctionComponent = () => {
   const router = useRouter();
 
@@ -16,10 +18,18 @@ const SearchBar: FunctionComponent = () => {
     if (sh === null) {
       localStorage.setItem("search_history", JSON.stringify([searchValue]));
     } else {
-      localStorage.setItem(
-        "search_history",
-        JSON.stringify([...JSON.parse(sh), searchValue])
-      );
+      if (JSON.parse(sh).length === MAXLEN) {
+        const array_copy = JSON.parse(sh).slice(0, JSON.parse(sh).length - 1);
+        localStorage.setItem(
+          "search_history",
+          JSON.stringify([searchValue, ...array_copy])
+        );
+      } else {
+        localStorage.setItem(
+          "search_history",
+          JSON.stringify([searchValue, ...JSON.parse(sh)])
+        );
+      }
     }
 
     // @ts-ignore
