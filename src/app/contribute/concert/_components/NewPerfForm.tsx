@@ -1,35 +1,63 @@
 // @ts-nocheck
 "use client";
-import { FunctionComponent, SyntheticEvent } from "react";
+import { useRouter } from "next/navigation";
+import { FunctionComponent, SyntheticEvent, useState } from "react";
 
 const NewPerfForm: FunctionComponent = () => {
+  const router = useRouter();
+  const [error, setError] = useState<Boolean>(false);
+
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
 
-    const body = {
-      pieceName: e.currentTarget.pieceName.value,
-      composerName: e.currentTarget.composerName.value,
-      group: {
-        groupName:
-          e.currentTarget.groupName.value &&
-          e.currentTarget.individualName.value
-            ? `${e.currentTarget.groupName.value}/${e.currentTarget.individualName.value}`
-            : `${
-                e.currentTarget.groupName.value ||
-                e.currentTarget.individualName.value
-              }`,
-      },
-      performanceTime:
-        new Date(
-          `${e.currentTarget.date.value} ${e.currentTarget.time.value}`
-        ).getTime() / 1000,
-      location: {
-        name: e.currentTarget.locationName.value,
-      },
-      originalLink: e.currentTarget.link.value,
-    };
+    if (
+      // make sure either group or individual name is filled
+      !e.currentTarget.groupName.value &&
+      !e.currentTarget.individualName.value
+    ) {
+      setError(true);
+    } else {
+      const body = {
+        pieceName: e.currentTarget.pieceName.value,
+        composerName: e.currentTarget.composerName.value,
+        group: {
+          groupName:
+            e.currentTarget.groupName.value &&
+            e.currentTarget.individualName.value
+              ? `${e.currentTarget.groupName.value}/${e.currentTarget.individualName.value}`
+              : `${
+                  e.currentTarget.groupName.value ||
+                  e.currentTarget.individualName.value
+                }`,
+        },
+        performanceTime:
+          new Date(
+            `${e.currentTarget.date.value} ${e.currentTarget.time.value}`
+          ).getTime() / 1000,
+        location: {
+          name: e.currentTarget.locationName.value,
+        },
+        originalLink: e.currentTarget.link.value,
+      };
 
-    console.log(body);
+      console.log(body);
+      fetch("http://localhost:6608/concerts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
+        .then((res) => {
+          console.log(res);
+          if (res.status === 201) {
+            router.push("/contribute/concert/success");
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   };
 
   return (
@@ -51,7 +79,6 @@ const NewPerfForm: FunctionComponent = () => {
             type="text"
             name="pieceName"
             className="h-8 border-2 rounded-md w-full dark:text-black"
-            placeholder="ex. A Merry March"
             required
           />
         </div>
@@ -64,7 +91,6 @@ const NewPerfForm: FunctionComponent = () => {
             type="text"
             name="composerName"
             className="h-8 border-2 rounded-md w-full dark:text-black"
-            placeholder="ex. Sally Sue"
             required
           />
         </div>
@@ -79,8 +105,11 @@ const NewPerfForm: FunctionComponent = () => {
           <input
             type="text"
             name="groupName"
-            className="h-8 border-2 rounded-md w-full dark:text-black"
-            placeholder="ex. My Quartet"
+            className={
+              error
+                ? "h-8 border-2 border-red-400 rounded-md w-full dark:text-black"
+                : "h-8 border-2 rounded-md w-full dark:text-black"
+            }
           />
         </div>
 
@@ -89,22 +118,33 @@ const NewPerfForm: FunctionComponent = () => {
           <input
             type="text"
             name="individualName"
-            className="h-8 border-2 rounded-md w-full dark:text-black"
-            placeholder="ex. Daniel Angel"
+            className={
+              error
+                ? "h-8 border-2 border-red-400 rounded-md w-full dark:text-black"
+                : "h-8 border-2 rounded-md w-full dark:text-black"
+            }
           />
         </div>
 
-        <div className="col-span-2 bg-orange-200 mx-4 px-3 py-2 border-l-4 border-orange-400 text-black">
+        <div
+          className={
+            error
+              ? "col-span-2 bg-red-200 mx-4 px-3 py-2 border-l-4 border-red-600 text-black"
+              : "col-span-2 bg-orange-200 mx-4 px-3 py-2 border-l-4 border-orange-400 text-black"
+          }
+        >
           <h2>Group Name OR Individual Name must be filled out.</h2>
         </div>
 
         <div className="col-span-1 px-4">
-          <p>Venue Name</p>
+          <p>
+            Venue Name<span className="text-red-600">*</span>
+          </p>
           <input
             type="text"
             name="locationName"
             className="h-8 border-2 rounded-md w-full dark:text-black"
-            placeholder="ex. Bass Performance Hall"
+            required
           />
         </div>
 
@@ -141,7 +181,10 @@ const NewPerfForm: FunctionComponent = () => {
           />
         </div>
       </div>
-      <div className="px-4 flex flex-row-reverse">
+      <div className="pr-4 flex justify-between">
+        <p>
+          <span className="text-red-600">*</span>=required field
+        </p>
         <input
           type="submit"
           value="Submit"
