@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: classicalslivefrontend
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: classicalslivefrontend
+  template:
+    metadata:
+      labels:
+        app: classicalslivefrontend
+    spec:
+      containers:
+        - name: classicalslivefrontend
+          image: dongjiy/classicalslivefrontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
