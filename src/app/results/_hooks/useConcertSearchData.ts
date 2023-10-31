@@ -16,7 +16,7 @@ export default function useConcertSearchData(query: string | null): Return {
       setIsLoading(false);
       setConcertData(null);
     } else {
-      fetch(`http://localhost:6608/search?q=${query}`)
+      fetch(`https://api.classicals.live/search?q=${query}`)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

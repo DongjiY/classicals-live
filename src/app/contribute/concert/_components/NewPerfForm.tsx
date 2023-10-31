@@ -41,7 +41,7 @@ const NewPerfForm: FunctionComponent = () => {
       };
 
       console.log(body);
-      fetch("http://localhost:6608/concerts", {
+      fetch("https://api.classicals.live/concerts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
