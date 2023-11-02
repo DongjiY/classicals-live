@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Logo from "./Logo";
-import styles from "../navbar.module.css";
+import styles from "./_styles/navbar.module.css";
 
 export default function Navbar() {
   return (
@@ -18,9 +18,9 @@ export default function Navbar() {
         </div>
 
         <label className={`md:hidden ${styles.customlabel}`}>
-          <input type="checkbox" />
-          <span className="menu">
-            <div className="hamburger"></div>
+          <input type="checkbox" className={styles.custominput} />
+          <span className={styles.menu}>
+            <div className={styles.hamburger}></div>
           </span>
           <ul>
             <li>

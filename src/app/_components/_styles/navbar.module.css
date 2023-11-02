@@ -1,9 +1,9 @@
 @media (prefers-color-scheme: dark) {
-  .customlabel span {
+  .menu {
     background: #0f172a !important;
   }
 
-  .customlabel input:checked + span {
+  .custominput:checked + span {
     box-shadow: 0 0 0 100vw #0f172a, 0 0 0 100vh #0f172a !important;
   }
 
@@ -11,14 +11,14 @@
     color: #fff !important;
   }
 
-  .customlabel div,
-  .customlabel div:after,
-  .customlabel div:before {
+  .hamburger,
+  .hamburger:after,
+  .hamburger:before {
     background: #fff !important;
   }
 }
 
-.customlabel span {
+.menu {
   position: absolute;
   right: -100px;
   top: -120px;
@@ -32,13 +32,13 @@
   cursor: pointer;
 }
 
-.customlabel div {
+.hamburger {
   position: absolute;
   top: 160px;
   left: 50px;
   width: 30px;
   height: 2px;
-  background: #dc2626;
+  background: #000;
   display: block;
   -webkit-transform-origin: center;
   transform-origin: center;
@@ -46,8 +46,8 @@
   transition: 0.5s ease-in-out;
 }
 
-.customlabel div:after,
-.customlabel div:before {
+.hamburger:after,
+.hamburger:before {
   -webkit-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
   content: "";
@@ -55,50 +55,51 @@
   display: block;
   width: 100%;
   height: 100%;
-  background: #dc2626;
+  background: #000;
 }
 
-.customlabel div:before {
+.hamburger:before {
   top: -10px;
 }
 
-.customlabel div:after {
+.hamburger:after {
   bottom: -10px;
 }
 
-.customlabel input {
+.custominput {
   display: none;
 }
 
-.customlabel input:checked + span {
+.custominput:checked + span {
   box-shadow: 0 0 0 100vw #fff, 0 0 0 100vh #fff;
+  position: fixed;
   border-radius: 0;
 }
 
-.customlabel input:checked + span div {
+.custominput:checked + span div {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 
-.customlabel input:checked + span div:after {
+.custominput:checked + span div:after {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
   bottom: 0;
 }
 
-.customlabel input:checked + span div:before {
+.custominput:checked + span div:before {
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
   top: 0;
 }
 
-.customlabel input:checked + span + ul {
+.custominput:checked + span + ul {
   opacity: 1;
 }
 
 .customlabel ul {
   z-index: 200;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);

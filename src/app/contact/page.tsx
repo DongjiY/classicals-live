@@ -15,7 +15,7 @@ const ContactPage: NextPage = () => {
         <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
           <div className="mt-8 overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="p-6 mr-2 bg-red-100 dark:bg-gray-600 sm:rounded-lg">
+              <div className="p-6 mr-2 bg-red-100 dark:bg-gray-600 rounded-lg">
                 <h1 className="text-4xl sm:text-5xl text-black dark:text-white font-extrabold tracking-tight font-fancy">
                   Get in touch
                 </h1>
@@ -31,7 +31,7 @@ const ContactPage: NextPage = () => {
                     strokeLinejoin="round"
                     strokeWidth="1.5"
                     viewBox="0 0 24 24"
-                    className="w-8 h-8 text-black dark:text-white"
+                    className="w-8 h-8 text-black dark:text-white hidden sm:block"
                   >
                     <path
                       strokeLinecap="round"
@@ -53,7 +53,7 @@ const ContactPage: NextPage = () => {
                     strokeLinejoin="round"
                     strokeWidth="1.5"
                     viewBox="0 0 24 24"
-                    className="w-8 h-8 text-black dark:text-white"
+                    className="w-8 h-8 text-black dark:text-white hidden sm:block"
                   >
                     <path
                       strokeLinecap="round"
