@@ -62,7 +62,7 @@ const NewPerfForm: FunctionComponent = () => {
 
   return (
     <form
-      className="mx-auto w-1/2 py-8 h-[70vh] dark:text-white"
+      className="mx-auto w-11/12 md:w-1/2 py-8 min-h-[70vh] dark:text-white"
       onSubmit={handleSubmit}
     >
       <h1 className="text-center font-fancy text-3xl">Add a Performance</h1>
@@ -70,7 +70,7 @@ const NewPerfForm: FunctionComponent = () => {
       <h2 className="font-modern text-lg mt-3">
         Tell us a little about the piece...
       </h2>
-      <div className="grid grid-cols-2 grid-rows-1 py-4 gap-x-2 gap-y-2 font-modern">
+      <div className="grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 py-4 gap-x-2 gap-y-2 font-modern">
         <div className="col-span-1 px-4">
           <p>
             Piece Name<span className="text-red-600">*</span>
@@ -99,8 +99,8 @@ const NewPerfForm: FunctionComponent = () => {
       <h2 className="font-modern text-lg mt-3">
         Tell us a little about the performance...
       </h2>
-      <div className="grid grid-cols-2 grid-rows-4 py-4 gap-x-2 gap-y-2 font-modern">
-        <div className="col-span-1 px-4">
+      <div className="grid grid-cols-2 grid-rows-6 grid-rows-md:grid-cols-2 md:grid-rows-4 py-4 gap-x-2 gap-y-2 font-modern">
+        <div className="col-span-2 md:col-span-1 px-4">
           <p>Group Name</p>
           <input
             type="text"
@@ -113,7 +113,7 @@ const NewPerfForm: FunctionComponent = () => {
           />
         </div>
 
-        <div className="col-span-1 px-4">
+        <div className="col-span-2 md:col-span-1 px-4">
           <p>Individual Name</p>
           <input
             type="text"
@@ -136,7 +136,7 @@ const NewPerfForm: FunctionComponent = () => {
           <h2>Group Name OR Individual Name must be filled out.</h2>
         </div>
 
-        <div className="col-span-1 px-4">
+        <div className="col-span-2 md:col-span-1 px-4">
           <p>
             Venue Name<span className="text-red-600">*</span>
           </p>
@@ -148,7 +148,7 @@ const NewPerfForm: FunctionComponent = () => {
           />
         </div>
 
-        <div className="col-span-1 px-4">
+        <div className="col-span-2 md:col-span-1 px-4">
           <p>
             Performance Date & Time<span className="text-red-600">*</span>
           </p>
@@ -156,13 +156,13 @@ const NewPerfForm: FunctionComponent = () => {
             <input
               type="date"
               name="date"
-              className="h-8 border-2 rounded-md w-[45%] dark:text-black"
+              className="h-8 border-2 rounded-md w-[49%] md:w-[45%] dark:text-black"
               required
             />
             <input
               type="time"
               name="time"
-              className="h-8 border-2 rounded-md w-[45%] dark:text-black"
+              className="h-8 border-2 rounded-md w-[49%] md:w-[45%] dark:text-black"
               required
             />
           </div>
