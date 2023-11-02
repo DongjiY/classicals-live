@@ -6,6 +6,7 @@ import { FunctionComponent, SyntheticEvent, useState } from "react";
 const NewPerfForm: FunctionComponent = () => {
   const router = useRouter();
   const [error, setError] = useState<Boolean>(false);
+  const [numPieces, setNumPieces] = useState<number>(1);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -17,9 +18,20 @@ const NewPerfForm: FunctionComponent = () => {
     ) {
       setError(true);
     } else {
+      let pieces = [];
+      let searchString = "";
+      for (let i = 0; i < numPieces; i++) {
+        pieces.push({
+          pieceName: e.currentTarget[`pieceName-${i}`].value,
+          composerName: e.currentTarget[`composerName-${i}`].value,
+        });
+        searchString = `${searchString} ${
+          e.currentTarget[`pieceName-${i}`].value
+        } ${e.currentTarget[`composerName-${i}`].value}`;
+      }
       const body = {
-        pieceName: e.currentTarget.pieceName.value,
-        composerName: e.currentTarget.composerName.value,
+        searchString: searchString,
+        pieces: pieces,
         group: {
           groupName:
             e.currentTarget.groupName.value &&
@@ -60,6 +72,62 @@ const NewPerfForm: FunctionComponent = () => {
     }
   };
 
+  const generatePieceRow = () => {
+    let res = [];
+    for (let i = 0; i < numPieces; i++) {
+      res.push(
+        <div className="flex items-center mb-2" key={i}>
+          <div className="grow grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 py-4 gap-x-2 gap-y-2 font-modern">
+            <div className="col-span-1 px-4">
+              <p>
+                Piece Name<span className="text-red-600">*</span>
+              </p>
+              <input
+                type="text"
+                name={`pieceName-${i}`}
+                className="h-8 border-2 rounded-md w-full dark:text-black"
+                required
+              />
+            </div>
+
+            <div className="col-span-1 px-4">
+              <p>
+                Composer Full Name<span className="text-red-600">*</span>
+              </p>
+              <input
+                type="text"
+                name={`composerName-${i}`}
+                className="h-8 border-2 rounded-md w-full dark:text-black"
+                required
+              />
+            </div>
+          </div>
+
+          <button
+            onClick={() => {
+              setNumPieces(numPieces - 1);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="w-5 h-5 mt-5 fill-red-500"
+            >
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+                clipRule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+      );
+    }
+
+    return res;
+  };
+
   return (
     <form
       className="mx-auto w-11/12 md:w-1/2 py-8 min-h-[70vh] dark:text-white"
@@ -70,30 +138,16 @@ const NewPerfForm: FunctionComponent = () => {
       <h2 className="font-modern text-lg mt-3">
         Tell us a little about the piece...
       </h2>
-      <div className="grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 py-4 gap-x-2 gap-y-2 font-modern">
-        <div className="col-span-1 px-4">
-          <p>
-            Piece Name<span className="text-red-600">*</span>
-          </p>
-          <input
-            type="text"
-            name="pieceName"
-            className="h-8 border-2 rounded-md w-full dark:text-black"
-            required
-          />
-        </div>
-
-        <div className="col-span-1 px-4">
-          <p>
-            Composer Full Name<span className="text-red-600">*</span>
-          </p>
-          <input
-            type="text"
-            name="composerName"
-            className="h-8 border-2 rounded-md w-full dark:text-black"
-            required
-          />
-        </div>
+      {generatePieceRow()}
+      <div className="w-full text-center">
+        <button
+          onClick={() => {
+            setNumPieces(numPieces + 1);
+          }}
+          className="w-2/3 mx-auto bg-green-500 py-1.5 rounded-lg hover:opacity-70 duration-200"
+        >
+          Add Piece
+        </button>
       </div>
 
       <h2 className="font-modern text-lg mt-3">
