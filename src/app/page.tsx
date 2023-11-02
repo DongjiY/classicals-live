@@ -14,8 +14,8 @@ const Home: NextPage = () => {
   return (
     <main className="min-h-screen bg-white dark:bg-gray-800">
       <Navbar />
-      <section className="w-2/3 mx-auto py-8">
-        <div className="bg-[url('/images/orchestra.png')] w-full h-[500px] bg-cover bg-center rounded-lg flex flex-col justify-center gap-y-3 px-8">
+      <section className="w-full md:w-2/3 mx-auto md:py-8">
+        <div className="bg-[url('/images/orchestra.png')] w-full h-[500px] bg-cover bg-center md:rounded-lg flex flex-col justify-center gap-y-3 px-8">
           <h1 className="text-white font-fancy font-bold text-5xl w-full">
             Find performances of your favorite pieces
           </h1>
@@ -23,11 +23,11 @@ const Home: NextPage = () => {
         </div>
       </section>
 
-      <section className="w-2/3 mx-auto pb-8 pt-2">
+      <section className="w-10/12 md:w-2/3 mx-auto pb-8 pt-8 md:pt-2">
         <RecentSearches />
       </section>
 
-      <section className="w-2/3 mx-auto overflow-x-hidden">
+      <section className="w-10/12 md:w-2/3 mx-auto overflow-x-hidden">
         <h1 className="font-modern font-bold text-2xl dark:text-white">
           Trending This Week
         </h1>
