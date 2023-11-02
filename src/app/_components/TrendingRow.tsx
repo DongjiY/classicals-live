@@ -53,7 +53,7 @@ const TrendingRow: FunctionComponent<Concert> = ({
       .padStart(2, "0")}${suffix}`;
   };
   return (
-    <li className="p-4 bg-gray-100 rounded flex flex-wrap gap-y-2 justify-between items-baseline dark:bg-gray-600 dark:text-gray-100 overflow-x-scroll">
+    <li className="p-4 bg-gray-100 rounded flex flex-wrap gap-y-2 justify-between items-baseline dark:bg-gray-600 dark:text-gray-100 overflow-x-hidden">
       <div className="flex flex-col">
         <h2 className="font-semibold text-lg text-ellipsis overflow-x-hidden whitespace-nowrap md:whitespace-normal md:overflow-x-auto">
           <a href={originalLink}>{pieceName}</a>
