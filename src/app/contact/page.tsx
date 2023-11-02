@@ -1,6 +1,7 @@
 import { Metadata, NextPage } from "next";
 import Navbar from "../_components/Navbar";
 import Footer from "../_components/Footer";
+import ContactForm from "./_components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -14,7 +15,7 @@ const ContactPage: NextPage = () => {
         <div className="max-w-6xl mx-auto sm:px-6 lg:px-8">
           <div className="mt-8 overflow-hidden">
             <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="p-6 mr-2 bg-red-100 dark:bg-gray-600 sm:rounded-lg">
+              <div className="p-6 mr-2 bg-red-100 dark:bg-gray-600 rounded-lg">
                 <h1 className="text-4xl sm:text-5xl text-black dark:text-white font-extrabold tracking-tight font-fancy">
                   Get in touch
                 </h1>
@@ -30,7 +31,7 @@ const ContactPage: NextPage = () => {
                     strokeLinejoin="round"
                     strokeWidth="1.5"
                     viewBox="0 0 24 24"
-                    className="w-8 h-8 text-black dark:text-white"
+                    className="w-8 h-8 text-black dark:text-white hidden sm:block"
                   >
                     <path
                       strokeLinecap="round"
@@ -52,7 +53,7 @@ const ContactPage: NextPage = () => {
                     strokeLinejoin="round"
                     strokeWidth="1.5"
                     viewBox="0 0 24 24"
-                    className="w-8 h-8 text-black dark:text-white"
+                    className="w-8 h-8 text-black dark:text-white hidden sm:block"
                   >
                     <path
                       strokeLinecap="round"
@@ -62,55 +63,12 @@ const ContactPage: NextPage = () => {
                     />
                   </svg>
                   <div className="ml-4 text-md tracking-wide font-semibold w-40">
-                    contact@classicals.live
+                    contact.classicalslive@gmail.com
                   </div>
                 </div>
               </div>
 
-              <form className="p-6 flex flex-col justify-center">
-                <div className="flex flex-col">
-                  <label htmlFor="name" className="hidden">
-                    Full Name
-                  </label>
-                  <input
-                    type="name"
-                    name="name"
-                    id="name"
-                    placeholder="Full Name"
-                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-white text-gray-800 dark:text-white font-semibold focus:outline-none"
-                  />
-                </div>
-
-                <div className="flex flex-col mt-2">
-                  <label htmlFor="email" className="hidden">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Email"
-                    className="w-100 mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-white dark:text-white text-gray-800 font-semibold focus:outline-none"
-                  />
-                </div>
-
-                <div className="flex flex-col mt-2">
-                  <label htmlFor="tel" className="hidden">
-                    Number
-                  </label>
-                  <textarea
-                    placeholder="Your message here..."
-                    className="mt-2 py-3 px-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-400 dark:border-white dark:text-white text-gray-800 font-semibold focus:outline-none"
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  className="md:w-32 bg-red-600 hover:bg-blue-dark text-white font-bold py-3 px-6 rounded-lg mt-3 hover:bg-red-700 transition ease-in-out duration-300"
-                >
-                  Submit
-                </button>
-              </form>
+              <ContactForm />
             </div>
           </div>
         </div>

@@ -29,6 +29,7 @@ FROM base AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
+ENV NEXT_PUBLIC_EMAIL_JS_PUBLIC_KEY=_FnUk9KcoNhemBsBE
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001

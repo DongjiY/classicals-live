@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="w-full text-gray-700 bg-gray-100 body-font mt-12 dark:bg-gray-900">
       <div className="container flex flex-col flex-wrap px-5 py-24 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
-        <div className="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
+        <div className="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left flex flex-col items-center md:block">
           <Logo />
           <p className="mt-2 text-sm text-gray-500 dark:text-white">
             Find concerts near you.
@@ -20,7 +20,7 @@ export default function Footer() {
               <li className="mt-3">
                 <Link
                   href="/"
-                  className="text-gray-500 cursor-pointer hover:text-gray-900 dark:text-white"
+                  className="text-gray-500 cursor-pointer hover:text-gray-900 dark:hover:text-red-600  dark:text-white"
                 >
                   Home
                 </Link>
@@ -28,7 +28,7 @@ export default function Footer() {
               <li className="mt-3">
                 <Link
                   href="/contact"
-                  className="text-gray-500 cursor-pointer hover:text-gray-900 dark:text-white"
+                  className="text-gray-500 cursor-pointer hover:text-gray-900 dark:hover:text-red-600 dark:text-white"
                 >
                   Contact
                 </Link>
@@ -43,7 +43,7 @@ export default function Footer() {
               <li className="mt-3">
                 <Link
                   href="/contribute/concert"
-                  className="text-gray-500 cursor-pointer hover:text-gray-900 dark:text-white"
+                  className="text-gray-500 cursor-pointer hover:text-gray-900 dark:hover:text-red-600 dark:text-white"
                 >
                   Add Performance
                 </Link>
@@ -51,7 +51,7 @@ export default function Footer() {
               <li className="mt-3">
                 <Link
                   href="https://github.com/DongjiY/classicals-live"
-                  className="text-gray-500 cursor-pointer hover:text-gray-900 dark:text-white"
+                  className="text-gray-500 cursor-pointer hover:text-gray-900 dark:hover:text-red-600 dark:text-white"
                 >
                   Source Code
                 </Link>
@@ -64,17 +64,17 @@ export default function Footer() {
             </h2>
             <nav className="mb-10 list-none">
               <li className="mt-3">
-                <a className="text-gray-500 cursor-pointer hover:text-gray-900">
+                <a className="text-gray-500 cursor-pointer hover:text-gray-900 dark:hover:text-red-600">
                   Terms &amp; Privacy
                 </a>
               </li>
               <li className="mt-3">
-                <a className="text-gray-500 cursor-pointer hover:text-gray-900">
+                <a className="text-gray-500 cursor-pointer hover:text-gray-900 dark:hover:text-red-600">
                   Pricing
                 </a>
               </li>
               <li className="mt-3">
-                <a className="text-gray-500 cursor-pointer hover:text-gray-900">
+                <a className="text-gray-500 cursor-pointer hover:text-gray-900 dark:hover:text-red-600">
                   FAQ
                 </a>
               </li>
@@ -86,17 +86,17 @@ export default function Footer() {
             </h2>
             <nav className="mb-10 list-none">
               <li className="mt-3">
-                <a className="text-gray-500 cursor-pointer hover:text-gray-900">
+                <a className="text-gray-500 cursor-pointer hover:text-gray-900 dark:hover:text-red-600">
                   Send a Message
                 </a>
               </li>
               <li className="mt-3">
-                <a className="text-gray-500 cursor-pointer hover:text-gray-900">
+                <a className="text-gray-500 cursor-pointer hover:text-gray-900 dark:hover:text-red-600">
                   Request a Quote
                 </a>
               </li>
               <li className="mt-3">
-                <a className="text-gray-500 cursor-pointer hover:text-gray-900">
+                <a className="text-gray-500 cursor-pointer hover:text-gray-900 dark:hover:text-red-600">
                   +123-456-7890
                 </a>
               </li>
