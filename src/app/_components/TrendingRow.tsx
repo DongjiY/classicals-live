@@ -1,7 +1,7 @@
 import { Concert } from "@/types/concert";
 import { FunctionComponent } from "react";
 
-const TrendingRow: FunctionComponent<Concert> = ({
+const TrendingRow: FunctionComponent<any> = ({
   pieceName,
   group,
   performanceTime,

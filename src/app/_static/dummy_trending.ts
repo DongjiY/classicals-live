@@ -1,6 +1,6 @@
 import { Concert } from "@/types/concert";
 
-export const trending_mock: Array<Concert> = [
+export const trending_mock: Array<any> = [
   {
     pieceName: "Tchaikovsky Symphony no. 5",
     group: {
