@@ -64,6 +64,7 @@
 
 .hamburger:after {
   bottom: -10px;
+  z-index: 300;
 }
 
 .custominput {
@@ -101,10 +102,16 @@
 .customlabel ul {
   z-index: 200;
   position: fixed;
-  top: 50%;
-  left: 50%;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
   -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  transform: translate(-100%, -5%);
   opacity: 0;
   visibility: hidden;
   -webkit-transition: 0.25s 0s ease-in-out;
