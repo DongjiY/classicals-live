@@ -2,6 +2,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { FunctionComponent, SyntheticEvent, useState } from "react";
+import AutocompleteInputField from "./AutocompleteInputField";
 
 const NewPerfForm: FunctionComponent = () => {
   const router = useRouter();
@@ -42,7 +43,7 @@ const NewPerfForm: FunctionComponent = () => {
         );
       }
       allPerformanceTimes.sort();
-      console.log(allPerformanceTimes);
+      // console.log(allPerformanceTimes);
 
       const body = {
         searchString: searchString,
@@ -107,12 +108,7 @@ const NewPerfForm: FunctionComponent = () => {
               <p>
                 Composer Full Name<span className="text-red-600">*</span>
               </p>
-              <input
-                type="text"
-                name={`composerName-${i}`}
-                className="h-8 border-2 rounded-md w-full dark:text-black"
-                required
-              />
+              <AutocompleteInputField i={i} />
             </div>
           </div>
 
