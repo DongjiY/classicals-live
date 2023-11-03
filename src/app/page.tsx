@@ -8,6 +8,7 @@ import RecentSearches from "./_components/RecentSearches";
 
 export const metadata: Metadata = {
   title: "ClassicalsLive",
+  description: "Find Concerts Near You",
 };
 
 const Home: NextPage = () => {

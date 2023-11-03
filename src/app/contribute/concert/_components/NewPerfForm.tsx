@@ -7,6 +7,7 @@ const NewPerfForm: FunctionComponent = () => {
   const router = useRouter();
   const [error, setError] = useState<Boolean>(false);
   const [numPieces, setNumPieces] = useState<number>(1);
+  const [numPerfs, setNumPerfs] = useState<number>(0);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -29,6 +30,20 @@ const NewPerfForm: FunctionComponent = () => {
           e.currentTarget[`pieceName-${i}`].value
         } ${e.currentTarget[`composerName-${i}`].value}`;
       }
+
+      let allPerformanceTimes = [];
+      for (let j = 1; j < numPerfs + 2; j++) {
+        allPerformanceTimes.push(
+          new Date(
+            `${e.currentTarget[`performance-${j}-date`].value} ${
+              e.currentTarget[`performance-${j}-time`].value
+            }`
+          ).getTime() / 1000
+        );
+      }
+      allPerformanceTimes.sort();
+      console.log(allPerformanceTimes);
+
       const body = {
         searchString: searchString,
         pieces: pieces,
@@ -42,10 +57,8 @@ const NewPerfForm: FunctionComponent = () => {
                   e.currentTarget.individualName.value
                 }`,
         },
-        performanceTime:
-          new Date(
-            `${e.currentTarget.date.value} ${e.currentTarget.time.value}`
-          ).getTime() / 1000,
+        performanceTime: allPerformanceTimes[allPerformanceTimes.length - 1],
+        additionalPerformanceTimes: allPerformanceTimes.slice(0, -1) || null,
         location: {
           name: e.currentTarget.locationName.value,
         },
@@ -103,24 +116,106 @@ const NewPerfForm: FunctionComponent = () => {
             </div>
           </div>
 
-          <button
-            onClick={() => {
-              setNumPieces(numPieces - 1);
-            }}
-          >
+          {i === numPieces - 1 ? (
+            <button
+              onClick={() => {
+                setNumPieces(numPieces - 1);
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="w-5 h-5 mt-5 fill-red-500"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              className="w-5 h-5 mt-5 fill-red-500"
+              className="w-5 h-5 mt-5"
             >
               <path
                 fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+                d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
                 clipRule="evenodd"
               />
             </svg>
-          </button>
+          )}
+        </div>
+      );
+    }
+
+    return res;
+  };
+
+  const generatePerfInputs = () => {
+    const TODAY = new Date();
+    let res = [];
+    for (let i = 0; i < numPerfs; i++) {
+      res.push(
+        <div className="w-full px-4">
+          <hr></hr>
+          <div className="grid grid-cols-12 grid-rows-1 gap-x-1 py-2">
+            <p className="col-span-3 hidden md:block">Performance {i + 2}</p>
+            <input
+              type="date"
+              name={`performance-${i + 2}-date`}
+              className="col-span-5 md:col-span-4 rounded text-black"
+              defaultValue={`${TODAY.toLocaleDateString("en-CA")}`}
+              required
+            />
+            <input
+              name={`performance-${i + 2}-time`}
+              type="time"
+              defaultValue={"19:00"}
+              className="col-span-5 md:col-span-4 rounded text-black"
+              required
+            />
+
+            <span className="col-span-2 md:col-span-1 flex flex-row-reverse">
+              {i === numPerfs - 1 ? (
+                <button
+                  onClick={() => {
+                    setNumPerfs(numPerfs - 1);
+                  }}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    className="w-5 h-5 fill-red-500"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </button>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              )}
+            </span>
+          </div>
         </div>
       );
     }
@@ -144,7 +239,7 @@ const NewPerfForm: FunctionComponent = () => {
           onClick={() => {
             setNumPieces(numPieces + 1);
           }}
-          className="w-2/3 mx-auto bg-green-500 py-1.5 rounded-lg hover:opacity-70 duration-200"
+          className="w-2/3 mx-auto bg-green-500 text-white py-1.5 rounded-lg hover:opacity-70 duration-200"
         >
           Add Piece
         </button>
@@ -209,14 +304,16 @@ const NewPerfForm: FunctionComponent = () => {
           <div className="flex items-center flex-wrap gap-x-1">
             <input
               type="date"
-              name="date"
+              name="performance-1-date"
               className="h-8 border-2 rounded-md w-[49%] md:w-[45%] dark:text-black"
+              defaultValue={new Date().toLocaleDateString("en-CA")}
               required
             />
             <input
               type="time"
-              name="time"
+              name="performance-1-time"
               className="h-8 border-2 rounded-md w-[49%] md:w-[45%] dark:text-black"
+              defaultValue={"19:00"}
               required
             />
           </div>
@@ -234,6 +331,17 @@ const NewPerfForm: FunctionComponent = () => {
             placeholder="ex. https://your-site-here"
           />
         </div>
+      </div>
+      {generatePerfInputs()}
+      <div className="w-full text-center pb-8 py-4">
+        <input
+          className="bg-blue-500 w-2/3 text-white py-1.5 rounded-lg hover:opacity-70 duration-200"
+          onClick={() => {
+            setNumPerfs(numPerfs + 1);
+          }}
+          type="button"
+          value="Add Performance Time"
+        ></input>
       </div>
       <div className="pr-4 flex justify-between">
         <p>

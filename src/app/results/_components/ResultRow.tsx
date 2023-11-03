@@ -5,6 +5,7 @@ const ResultRow: FunctionComponent<Concert> = ({
   pieces,
   group,
   performanceTime,
+  additionalPerformanceTimes,
   location,
   originalLink,
 }) => {
@@ -39,7 +40,16 @@ const ResultRow: FunctionComponent<Concert> = ({
     return `${daysArr[date.getDay()]}, ${monthsArr[date.getMonth()]}. ${date
       .getDate()
       .toString()
-      .padStart(2, "0")}`;
+      .padStart(2, "0")}, ${date.getFullYear()}`;
+  };
+
+  const unixToDateShort = (unix: number) => {
+    const date = new Date(unix * 1000);
+
+    return `${(date.getMonth() + 1).toString().padStart(2, "0")}-${date
+      .getDate()
+      .toString()
+      .padStart(2, "0")}-${date.getFullYear()}`;
   };
 
   const unixToTime = (unix: number) => {
@@ -111,6 +121,24 @@ const ResultRow: FunctionComponent<Concert> = ({
               </p>
             </li>
           ))}
+        </ul>
+
+        {additionalPerformanceTimes && (
+          <>
+            <hr className="my-3 dark:border-gray-500 border-gray-200" />
+            <h2 className="text-red-600 dark:text-white font-bold">
+              Additional Dates
+            </h2>
+          </>
+        )}
+        <ul className="pt-2 flex gap-x-4 max-w-full overflow-x-scroll flex-wrap">
+          {additionalPerformanceTimes &&
+            additionalPerformanceTimes.map((item, index) => (
+              <li className="bg-red-200 dark:bg-red-700 rounded px-3 py-3">
+                <p>{unixToDateShort(item)}</p>
+                <p>{unixToTime(item)}</p>
+              </li>
+            ))}
         </ul>
       </a>
     </li>

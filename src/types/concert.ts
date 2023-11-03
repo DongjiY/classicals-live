@@ -6,6 +6,7 @@ export interface Concert {
     groupName: string; // if linked to a group, search for the group and use the name there
   };
   performanceTime: number; // unix epoch
+  additionalPerformanceTimes: Array<number>;
   location: {
     latitide?: number;
     longitude?: number;
