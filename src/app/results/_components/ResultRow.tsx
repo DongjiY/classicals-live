@@ -131,7 +131,7 @@ const ResultRow: FunctionComponent<Concert> = ({
             </h2>
           </>
         )}
-        <ul className="pt-2 flex gap-x-4 max-w-full overflow-x-scroll flex-wrap">
+        <ul className="pt-2 flex gap-x-4 max-w-full overflow-x-auto flex-wrap">
           {additionalPerformanceTimes &&
             additionalPerformanceTimes.map((item, index) => (
               <li
