@@ -134,7 +134,10 @@ const ResultRow: FunctionComponent<Concert> = ({
         <ul className="pt-2 flex gap-x-4 max-w-full overflow-x-scroll flex-wrap">
           {additionalPerformanceTimes &&
             additionalPerformanceTimes.map((item, index) => (
-              <li className="bg-red-200 dark:bg-red-700 rounded px-3 py-3">
+              <li
+                className="bg-red-200 dark:bg-red-700 rounded px-3 py-3"
+                key={index}
+              >
                 <p>{unixToDateShort(item)}</p>
                 <p>{unixToTime(item)}</p>
               </li>
