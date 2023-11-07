@@ -1,4 +1,5 @@
 export interface Concert {
+  id: string;
   pieces: Array<{ pieceName: string; composerName: string }>;
   searchString: string;
   group: {
