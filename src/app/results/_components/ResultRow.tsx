@@ -11,7 +11,7 @@ const ResultRow: FunctionComponent<Concert> = ({
   additionalPerformanceTimes,
 }) => {
   return (
-    <li className="py-5 px-7 bg-white border-2 dark:border-gray-600 dark:bg-gray-700 rounded flex flex-wrap gap-y-2 justify-between items-baseline dark:text-gray-100 shadow-lg">
+    <li className="py-5 px-7 bg-white border-2 dark:border-gray-600 dark:bg-gray-700 rounded flex flex-wrap gap-y-2 justify-between items-baseline dark:text-gray-100 shadow">
       <Link className="w-full" href={`/concert/${id}`}>
         <div className="flex justify-between w-full flex-wrap">
           <div className="flex flex-col">
