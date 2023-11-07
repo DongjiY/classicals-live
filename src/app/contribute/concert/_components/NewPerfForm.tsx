@@ -66,7 +66,10 @@ const NewPerfForm: FunctionComponent = () => {
         originalLink: e.currentTarget.link.value,
       };
 
-      console.log(body);
+      body.searchString = `${body.searchString} ${body.group.groupName}`;
+
+      // console.log(body);
+
       fetch("https://api.classicals.live/concerts", {
         method: "POST",
         headers: {
