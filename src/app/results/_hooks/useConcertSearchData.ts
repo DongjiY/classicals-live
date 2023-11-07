@@ -27,9 +27,12 @@ export default function useConcertSearchData(query: string | null): Return {
                 _id: string;
                 _index: number;
                 _score: number;
-                _source: Concert;
+                _source: Object;
               }) => {
-                return row._source;
+                return {
+                  id: row._id,
+                  ...row._source,
+                } as Concert;
               }
             )
           );
