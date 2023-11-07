@@ -34,7 +34,15 @@ const ConcertInfo: FunctionComponent<Props> = ({ id }) => {
                 {data?.group.groupName.split("/")[0]}
               </h1>
               <h1>
-                <span className="text-red-600 font-bold">ft.&nbsp;</span>
+                <span
+                  className={
+                    data?.group.groupName.split("/")[1]
+                      ? "text-red-600 font-bold"
+                      : "hidden"
+                  }
+                >
+                  ft.&nbsp;
+                </span>
                 {data?.group.groupName.split("/")[1] ?? ""}
               </h1>
             </div>
@@ -57,8 +65,8 @@ const ConcertInfo: FunctionComponent<Props> = ({ id }) => {
             <h2 className="text-lg mt-4">Performance Times</h2>
             <ul className="col-span-2 gap-y-1 flex flex-col">
               {[
-                data?.performanceTime,
                 ...(data?.additionalPerformanceTimes ?? []),
+                data?.performanceTime,
               ].map((item, index) => (
                 <li
                   className="bg-gray-100 dark:bg-gray-500 rounded px-3 py-3 hover:border-l-4 hover:border-red-500 flex justify-between"
