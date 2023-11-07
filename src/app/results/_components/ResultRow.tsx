@@ -51,7 +51,7 @@ const ResultRow: FunctionComponent<Concert> = ({
           </h2>
         </div>
         <ul className="pt-2 gap-x-2 gap-y-2 max-w-full overflow-x-auto flex-wrap hidden md:flex">
-          {[performanceTime, ...(additionalPerformanceTimes ?? [])].map(
+          {[...(additionalPerformanceTimes ?? []), performanceTime].map(
             (item, index) => (
               <li
                 className="bg-red-200 dark:bg-red-700 rounded px-3 py-3"
