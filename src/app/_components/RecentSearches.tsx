@@ -59,7 +59,7 @@ const RecentSearches: FunctionComponent = () => {
         <div
           className={
             displayLeftScroller
-              ? "absolute top-0 left-0 bg-white rounded-full flex justify-center items-center p-1 border-2 shadow-lg !-translate-x-[55%] m-auto bottom-0 h-max dark:bg-gray-200"
+              ? "absolute top-0 left-0 bg-white rounded-full flex justify-center items-center p-1 border-2 shadow-lg !-translate-x-[55%] m-auto bottom-0 h-max dark:bg-gray-700 dark:border-gray-600"
               : "hidden"
           }
           onClick={() => {
@@ -90,7 +90,7 @@ const RecentSearches: FunctionComponent = () => {
         <div
           className={
             displayRightScroller
-              ? "absolute top-0 right-0 bg-white rounded-full flex justify-center items-center p-1 border-2 shadow-lg !translate-x-[55%] m-auto bottom-0 h-max dark:bg-gray-200"
+              ? "absolute top-0 right-0 bg-white rounded-full flex justify-center items-center p-1 border-2 shadow-lg !translate-x-[55%] m-auto bottom-0 h-max dark:bg-gray-700 dark:border-gray-600"
               : "hidden"
           }
           onClick={() => {
@@ -126,7 +126,7 @@ const RecentSearches: FunctionComponent = () => {
             if (index === 0) {
               return (
                 <Link href={`/results?q=${item}`} key={index} ref={firstEl}>
-                  <li className="max-w-[200px] min-w-[200px] h-[100px] border-2 dark:border-gray-500 dark:bg-gray-600 rounded-xl flex items-center p-2 hover:bg-red-600 group dark:hover:bg-red-700 duration-200">
+                  <li className="max-w-[200px] min-w-[200px] h-[100px] border-2 dark:border-gray-600 dark:bg-gray-700/80 rounded-xl flex items-center p-2 hover:bg-red-600 group dark:hover:bg-red-700 duration-200">
                     <p className="font-modern font-semibold text-gray-600 group-hover:text-white dark:text-white text-xl whitespace-nowrap text-ellipsis max-w-[180px] min-w-[180px] overflow-x-hidden">
                       {item}
                     </p>
@@ -136,7 +136,7 @@ const RecentSearches: FunctionComponent = () => {
             } else if (index === data.length - 1) {
               return (
                 <Link href={`/results?q=${item}`} key={index} ref={lastEl}>
-                  <li className="max-w-[200px] min-w-[200px] h-[100px] border-2 dark:border-gray-500 dark:bg-gray-600 rounded-xl flex items-center p-2 hover:bg-red-600 group dark:hover:bg-red-700 duration-200">
+                  <li className="max-w-[200px] min-w-[200px] h-[100px] border-2 dark:border-gray-600 dark:bg-gray-700/80 rounded-xl flex items-center p-2 hover:bg-red-600 group dark:hover:bg-red-700 duration-200">
                     <p className="font-modern font-semibold text-gray-600 group-hover:text-white dark:text-white text-xl whitespace-nowrap text-ellipsis max-w-[180px] min-w-[180px] overflow-x-hidden">
                       {item}
                     </p>
@@ -146,7 +146,7 @@ const RecentSearches: FunctionComponent = () => {
             } else {
               return (
                 <Link href={`/results?q=${item}`} key={index}>
-                  <li className="max-w-[200px] min-w-[200px] h-[100px] border-2 dark:border-gray-500 dark:bg-gray-600 rounded-xl flex items-center p-2 hover:bg-red-600 group dark:hover:bg-red-700 duration-200">
+                  <li className="max-w-[200px] min-w-[200px] h-[100px] border-2 dark:border-gray-600 dark:bg-gray-700/80 rounded-xl flex items-center p-2 hover:bg-red-600 group dark:hover:bg-red-700 duration-200">
                     <p className="font-modern font-semibold text-gray-600 group-hover:text-white dark:text-white text-xl whitespace-nowrap text-ellipsis max-w-[180px] min-w-[180px] overflow-x-hidden">
                       {item}
                     </p>

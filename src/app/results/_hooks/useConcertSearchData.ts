@@ -1,4 +1,3 @@
-import { trending_mock } from "@/app/_static/dummy_trending";
 import { Concert } from "@/types/concert";
 import { useEffect, useState } from "react";
 

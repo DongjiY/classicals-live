@@ -11,7 +11,7 @@ export default function useConcertData(id: string): Return {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch(`https://api.classicals.live/concerts/${id}`)
+    fetch(`https://api.classicals.live/concerts/id/${id}`)
       .then((res) => res.json())
       .then((data: { body: { _id: string; _source: Object } }) => {
         setData({
