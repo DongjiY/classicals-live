@@ -23,7 +23,12 @@ const Calendar: FunctionComponent = () => {
     const start_buffer = day * SECS_IN_DAY;
 
     for (let i = 0; i < data.length; i++) {
-      for (let j = 0; j < data[i].additionalPerformanceTimes.length + 1; j++) {
+      for (
+        let j = 0;
+        j < (data[i]?.additionalPerformanceTimes?.length || 0) + 1;
+        j++
+      ) {
+        console.log(i, j);
         if (j === 0) {
           if (
             data[i].performanceTime > getStartOfWeekUnixTime() + start_buffer &&
