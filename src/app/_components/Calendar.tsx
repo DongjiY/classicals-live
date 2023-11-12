@@ -16,7 +16,7 @@ const Calendar: FunctionComponent = () => {
   const getAllRowItemsForThisDay = (day: number): Array<ReactNode> => {
     if (isLoading || data.length === 0) return [];
 
-    let res: Array<ReactNode> = [];
+    let res: Array<{ t: number; node: ReactNode }> = [];
 
     const SECS_IN_DAY = 86400;
 
@@ -35,13 +35,16 @@ const Calendar: FunctionComponent = () => {
             data[i].performanceTime <
               getStartOfWeekUnixTime() + start_buffer + SECS_IN_DAY
           ) {
-            res.push(
-              <CalendarItem
-                concertId={data[i].id}
-                time={unixToTime(data[i].performanceTime)}
-                groupName={data[i].group.groupName}
-              />
-            );
+            res.push({
+              t: data[i].performanceTime,
+              node: (
+                <CalendarItem
+                  concertId={data[i].id}
+                  time={unixToTime(data[i].performanceTime)}
+                  groupName={data[i].group.groupName}
+                />
+              ),
+            });
           }
         } else {
           if (
@@ -50,13 +53,16 @@ const Calendar: FunctionComponent = () => {
             data[i].additionalPerformanceTimes[j - 1] <
               getStartOfWeekUnixTime() + start_buffer + SECS_IN_DAY
           ) {
-            res.push(
-              <CalendarItem
-                concertId={data[i].id}
-                time={unixToTime(data[i].additionalPerformanceTimes[j - 1])}
-                groupName={data[i].group.groupName}
-              />
-            );
+            res.push({
+              t: data[i].additionalPerformanceTimes[j - 1],
+              node: (
+                <CalendarItem
+                  concertId={data[i].id}
+                  time={unixToTime(data[i].additionalPerformanceTimes[j - 1])}
+                  groupName={data[i].group.groupName}
+                />
+              ),
+            });
           }
         }
       }
@@ -70,7 +76,17 @@ const Calendar: FunctionComponent = () => {
     //   );
     // });
 
-    return res;
+    res.sort((a, b) => {
+      if (a.t > b.t) {
+        return 1;
+      } else if (a.t < b.t) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
+    return res.map((item) => item.node);
   };
 
   return (
@@ -107,6 +123,7 @@ const Calendar: FunctionComponent = () => {
             className="col-span-1 row-span-1 border-r-2 dark:border-slate-500"
           >
             <ul className="flex flex-col p-2 w-full gap-y-1">
+              <LoadingItem isLoading={isLoading} />
               {getAllRowItemsForThisDay(0)}
             </ul>
           </div>
@@ -115,6 +132,7 @@ const Calendar: FunctionComponent = () => {
             className="col-span-1 row-span-1 border-r-2 dark:border-slate-500"
           >
             <ul className="flex flex-col p-2 w-full gap-y-1">
+              <LoadingItem isLoading={isLoading} />
               {getAllRowItemsForThisDay(1)}
             </ul>
           </div>
@@ -123,6 +141,7 @@ const Calendar: FunctionComponent = () => {
             className="col-span-1 row-span-1 border-r-2 dark:border-slate-500"
           >
             <ul className="flex flex-col p-2 w-full gap-y-1">
+              <LoadingItem isLoading={isLoading} />
               {getAllRowItemsForThisDay(2)}
             </ul>
           </div>
@@ -131,6 +150,7 @@ const Calendar: FunctionComponent = () => {
             className="col-span-1 row-span-1 border-r-2 dark:border-slate-500"
           >
             <ul className="flex flex-col p-2 w-full gap-y-1">
+              <LoadingItem isLoading={isLoading} />
               {getAllRowItemsForThisDay(3)}
             </ul>
           </div>
@@ -139,6 +159,7 @@ const Calendar: FunctionComponent = () => {
             className="col-span-1 row-span-1 border-r-2 dark:border-slate-500"
           >
             <ul className="flex flex-col p-2 w-full gap-y-1">
+              <LoadingItem isLoading={isLoading} />
               {getAllRowItemsForThisDay(4)}
             </ul>
           </div>
@@ -147,11 +168,13 @@ const Calendar: FunctionComponent = () => {
             className="col-span-1 row-span-1 border-r-2 dark:border-slate-500"
           >
             <ul className="flex flex-col p-2 w-full gap-y-1">
+              <LoadingItem isLoading={isLoading} />
               {getAllRowItemsForThisDay(5)}
             </ul>
           </div>
           <div id="Saturday" className="col-span-1">
             <ul className="flex flex-col p-2 w-full gap-y-1">
+              <LoadingItem isLoading={isLoading} />
               {getAllRowItemsForThisDay(6)}
             </ul>
           </div>
@@ -180,6 +203,22 @@ const CalendarItem: FunctionComponent<Props> = ({
         <small>Learn More</small>
       </Link>
     </li>
+  );
+};
+
+type Props2 = {
+  isLoading: boolean;
+};
+
+const LoadingItem: FunctionComponent<Props2> = ({ isLoading }) => {
+  return (
+    <li
+      className={
+        isLoading
+          ? "h-[100px] dark:bg-gray-500 bg-gray-200 rounded-lg animate-pulse"
+          : "hidden"
+      }
+    ></li>
   );
 };
 
