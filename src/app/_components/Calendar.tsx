@@ -16,7 +16,7 @@ const Calendar: FunctionComponent = () => {
   const getAllRowItemsForThisDay = (day: number): Array<ReactNode> => {
     if (isLoading || data.length === 0) return [];
 
-    let res: Array<ReactNode> = [];
+    let res: Array<{ t: number; node: ReactNode }> = [];
 
     const SECS_IN_DAY = 86400;
 
@@ -35,13 +35,16 @@ const Calendar: FunctionComponent = () => {
             data[i].performanceTime <
               getStartOfWeekUnixTime() + start_buffer + SECS_IN_DAY
           ) {
-            res.push(
-              <CalendarItem
-                concertId={data[i].id}
-                time={unixToTime(data[i].performanceTime)}
-                groupName={data[i].group.groupName}
-              />
-            );
+            res.push({
+              t: data[i].performanceTime,
+              node: (
+                <CalendarItem
+                  concertId={data[i].id}
+                  time={unixToTime(data[i].performanceTime)}
+                  groupName={data[i].group.groupName}
+                />
+              ),
+            });
           }
         } else {
           if (
@@ -50,13 +53,16 @@ const Calendar: FunctionComponent = () => {
             data[i].additionalPerformanceTimes[j - 1] <
               getStartOfWeekUnixTime() + start_buffer + SECS_IN_DAY
           ) {
-            res.push(
-              <CalendarItem
-                concertId={data[i].id}
-                time={unixToTime(data[i].additionalPerformanceTimes[j - 1])}
-                groupName={data[i].group.groupName}
-              />
-            );
+            res.push({
+              t: data[i].additionalPerformanceTimes[j - 1],
+              node: (
+                <CalendarItem
+                  concertId={data[i].id}
+                  time={unixToTime(data[i].additionalPerformanceTimes[j - 1])}
+                  groupName={data[i].group.groupName}
+                />
+              ),
+            });
           }
         }
       }
@@ -70,7 +76,17 @@ const Calendar: FunctionComponent = () => {
     //   );
     // });
 
-    return res;
+    res.sort((a, b) => {
+      if (a.t > b.t) {
+        return 1;
+      } else if (a.t < b.t) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
+    return res.map((item) => item.node);
   };
 
   return (
