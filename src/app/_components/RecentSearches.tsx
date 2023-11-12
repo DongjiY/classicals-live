@@ -16,7 +16,7 @@ const RecentSearches: FunctionComponent = () => {
 
   useEffect(() => {
     // if (isOverflown(ref.current)) setDisplayRightScroller(true);
-    console.log(firstEl.current, lastEl.current);
+    // console.log(firstEl.current, lastEl.current);
 
     let options = {
       root: ref.current,
@@ -28,14 +28,14 @@ const RecentSearches: FunctionComponent = () => {
       // console.log("OFF SCREEN!", entries);
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          console.log("ON SCREEN", entry.target);
+          // console.log("ON SCREEN", entry.target);
           if (entry.target === firstEl.current) {
             setDisplayLeftScroller(false);
           } else if (entry.target === lastEl.current) {
             setDisplayRightScroller(false);
           }
         } else {
-          console.log("OFF SCREEN", entry.target);
+          // console.log("OFF SCREEN", entry.target);
           if (entry.target === firstEl.current) {
             setDisplayLeftScroller(true);
           } else if (entry.target === lastEl.current) {
@@ -63,7 +63,7 @@ const RecentSearches: FunctionComponent = () => {
               : "hidden"
           }
           onClick={() => {
-            console.log("CLOCKEDD");
+            // console.log("CLOCKEDD");
             if (ref.current)
               (ref.current as HTMLElement).scrollBy({
                 left: -300,
@@ -94,7 +94,7 @@ const RecentSearches: FunctionComponent = () => {
               : "hidden"
           }
           onClick={() => {
-            console.log("CLICCKEED");
+            // console.log("CLICCKEED");
             if (ref.current)
               (ref.current as HTMLElement).scrollBy({
                 left: 300,

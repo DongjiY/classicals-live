@@ -29,7 +29,7 @@ export default function useWeeklyConcertData(): Return {
             _source: Object;
           }>;
         }) => {
-          //   console.log("garba geel", data);
+          // console.log("garba geel", data);
           const arr = data.data.map((item) => {
             return {
               id: item._id,
