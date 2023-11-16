@@ -97,25 +97,81 @@ const Calendar: FunctionComponent = () => {
       <div className="max-h-[300px] rounded-lg overflow-auto font-modern dark:text-white">
         <div className="grid grid-cols-7 min-h-[300px] min-w-[1500px] dark:bg-gray-600 bg-gray-100 grid-rows-[50px_1fr] justify-items-stretch items-stretch rounded-b-lg">
           <div className="col-span-1 bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700 flex items-center justify-center">
-            <h3 className="">Sunday</h3>
+            <h3
+              className={
+                new Date().getDay() === 0
+                  ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
+                  : ""
+              }
+            >
+              Sunday
+            </h3>
           </div>
           <div className="col-span-1 flex items-center justify-center bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700">
-            <h3 className="">Monday</h3>
+            <h3
+              className={
+                new Date().getDay() === 1
+                  ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
+                  : ""
+              }
+            >
+              Monday
+            </h3>
           </div>
           <div className="col-span-1 flex items-center justify-center bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700">
-            <h3 className="">Tuesday</h3>
+            <h3
+              className={
+                new Date().getDay() === 2
+                  ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
+                  : ""
+              }
+            >
+              Tuesday
+            </h3>
           </div>
           <div className="col-span-1 flex items-center justify-center bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700">
-            <h3 className="">Wednesday</h3>
+            <h3
+              className={
+                new Date().getDay() === 3
+                  ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
+                  : ""
+              }
+            >
+              Wednesday
+            </h3>
           </div>
           <div className="col-span-1 flex items-center justify-center bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700">
-            <h3 className="">Thursday</h3>
+            <h3
+              className={
+                new Date().getDay() === 4
+                  ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
+                  : ""
+              }
+            >
+              Thursday
+            </h3>
           </div>
           <div className="col-span-1 flex items-center justify-center bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700">
-            <h3 className="">Friday</h3>
+            <h3
+              className={
+                new Date().getDay() === 5
+                  ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
+                  : ""
+              }
+            >
+              Friday
+            </h3>
           </div>
           <div className="col-span-1 flex items-center justify-center bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700">
-            <h3 className="">Saturday</h3>
+            <h3
+              className={
+                new Date().getDay() === 6
+                  ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
+                  : ""
+              }
+            >
+              Saturday
+            </h3>
           </div>
 
           <div
