@@ -1,7 +1,7 @@
 "use client";
 import { Concert } from "@/types/concert";
 import Link from "next/link";
-import { FunctionComponent, ReactNode } from "react";
+import { FunctionComponent, ReactNode, useEffect, useState } from "react";
 import useWeeklyConcertData from "../_hooks/useWeeklyConcertData";
 import {
   getEpochsForDayOfWeek,
@@ -12,6 +12,11 @@ import {
 
 const Calendar: FunctionComponent = () => {
   const { isLoading, data } = useWeeklyConcertData();
+  const [day, setDay] = useState<number>();
+
+  useEffect(() => {
+    setDay(new Date().getDay());
+  }, []);
 
   const getAllRowItemsForThisDay = (day: number): Array<ReactNode> => {
     if (isLoading || data.length === 0) return [];
@@ -99,7 +104,7 @@ const Calendar: FunctionComponent = () => {
           <div className="col-span-1 bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700 flex items-center justify-center">
             <h3
               className={
-                new Date().getDay() === 0
+                day === 0
                   ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
                   : ""
               }
@@ -110,7 +115,7 @@ const Calendar: FunctionComponent = () => {
           <div className="col-span-1 flex items-center justify-center bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700">
             <h3
               className={
-                new Date().getDay() === 1
+                day === 1
                   ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
                   : ""
               }
@@ -121,7 +126,7 @@ const Calendar: FunctionComponent = () => {
           <div className="col-span-1 flex items-center justify-center bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700">
             <h3
               className={
-                new Date().getDay() === 2
+                day === 2
                   ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
                   : ""
               }
@@ -132,7 +137,7 @@ const Calendar: FunctionComponent = () => {
           <div className="col-span-1 flex items-center justify-center bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700">
             <h3
               className={
-                new Date().getDay() === 3
+                day === 3
                   ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
                   : ""
               }
@@ -143,7 +148,7 @@ const Calendar: FunctionComponent = () => {
           <div className="col-span-1 flex items-center justify-center bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700">
             <h3
               className={
-                new Date().getDay() === 4
+                day === 4
                   ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
                   : ""
               }
@@ -154,7 +159,7 @@ const Calendar: FunctionComponent = () => {
           <div className="col-span-1 flex items-center justify-center bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700">
             <h3
               className={
-                new Date().getDay() === 5
+                day === 5
                   ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
                   : ""
               }
@@ -165,7 +170,7 @@ const Calendar: FunctionComponent = () => {
           <div className="col-span-1 flex items-center justify-center bg-gradient-to-b from-white to-gray-200 dark:from-slate-600 dark:to-slate-700">
             <h3
               className={
-                new Date().getDay() === 6
+                day === 6
                   ? "bg-indigo-500 rounded-full px-3 py-1 text-white"
                   : ""
               }
