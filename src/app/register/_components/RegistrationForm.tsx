@@ -1,11 +1,13 @@
 "use client";
 import Logo from "@/app/_components/Logo";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FunctionComponent, SyntheticEvent, useState } from "react";
 
 const RegistrationForm: FunctionComponent = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const defaultEmail = searchParams.get("email");
   const [fullName, setFullName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string>();
@@ -43,6 +45,16 @@ const RegistrationForm: FunctionComponent = () => {
           <Logo />
         </div>
         <form onSubmit={handleSubmit} className="flex flex-col w-full">
+          <p
+            className={
+              defaultEmail !== null
+                ? "bg-green-100 max-w-full flex mb-4 p-2 rounded-lg border-l-4 border-green-600"
+                : "hidden"
+            }
+          >
+            We could not find an account with that email. Please create an
+            account.
+          </p>
           <input
             type="text"
             className="p-3 border-[1px] border-slate-500 rounded mb-6 dark:bg-gray-200 w-full"
@@ -54,6 +66,7 @@ const RegistrationForm: FunctionComponent = () => {
             type="email"
             className="p-3 border-[1px] border-slate-500 rounded mb-6 dark:bg-gray-200 w-full"
             placeholder="Email"
+            defaultValue={defaultEmail ?? ""}
             onChange={(e) => setEmail(e.currentTarget.value)}
             required
           />

@@ -27,7 +27,7 @@ const LoginForm: FunctionComponent = () => {
         if (res.status === 201) {
           router.push("/login/sent");
         } else {
-          router.push("/register");
+          router.push(`/register?email=${email}`);
         }
       })
       .catch((err) => {
