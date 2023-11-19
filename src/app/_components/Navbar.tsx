@@ -8,12 +8,18 @@ export default function Navbar() {
       <div className="w-full pl-4 md:pl-0 md:w-2/3 mx-auto flex items-center justify-between">
         <Logo />
 
-        <div className="gap-x-6 dark:text-white hidden md:flex">
+        <div className="gap-x-6 dark:text-white hidden md:flex items-center">
           <Link href="/" className="font-semibold hover:text-red-600">
             Home
           </Link>
           <Link href="/contact" className="font-semibold hover:text-red-600">
             Contact
+          </Link>
+          <Link
+            href="/login"
+            className="font-semibold hover:text-white border-[3px] border-red-600 rounded-lg px-3 hover:bg-red-600 duration-100"
+          >
+            Login
           </Link>
         </div>
 
@@ -34,6 +40,14 @@ export default function Navbar() {
                 className="font-semibold hover:text-red-600"
               >
                 Contact
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/login"
+                className="font-semibold hover:text-red-600 !underline"
+              >
+                Login
               </Link>
             </li>
           </ul>
