@@ -18,6 +18,8 @@ const LoginForm: FunctionComponent = () => {
       body: JSON.stringify({
         destination: email,
       }),
+      credentials: "include",
+      mode: "cors",
     })
       .then((res) => {
         if (res.status === 201) {
