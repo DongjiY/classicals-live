@@ -1,39 +1,40 @@
+//@ts-nocheck
 "use client";
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import * as qr from "@bitjson/qr-code";
 import Link from "next/link";
 import useInitialQRLink from "../_hooks/useInitialQRLink";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 const Ticket: FunctionComponent = () => {
+  const ref = useRef(null);
+  const animatedOnceRef = useRef<boolean>(false);
   const [link, setLink] = useState<string>();
+  const { initialLink, isLoading } = useInitialQRLink();
 
   useEffect(() => {
     qr.defineCustomElements(window);
-  }, []);
 
-  const { initialLink } = useInitialQRLink();
+    try {
+      ref.current.addEventListener("codeRendered", () => {
+        if (animatedOnceRef.current) return;
+        ref.current.animateQRCode((targets, _x, _y, _count, entity) => ({
+          targets,
+          from: entity === "module" ? Math.random() * 200 : 200,
+          duration: 500,
+          easing: "cubic-bezier(.5,0,1,1)",
+          web: { opacity: [0, 1], scale: [0.5, 1.1, 1.0] },
+        }));
+        animatedOnceRef.current = true;
+      });
+    } catch (err) {}
+  }, [isLoading]);
 
   return (
-    <div className="max-w-md w-full h-full z-10 bg-red-900 rounded-3xl">
+    <div className="max-w-md w-full h-full z-10 bg-gray-200 rounded-3xl">
       <div className="flex flex-col">
-        <div className="bg-white relative drop-shadow-2xl  rounded-3xl p-4 m-4">
+        <div className="bg-white relative rounded-3xl p-4 m-4">
           <div className="flex-none sm:flex">
-            <div className=" relative h-32 w-32   sm:mb-0 mb-3 hidden">
-              <a
-                href="#"
-                className="absolute -right-2 bottom-2   -ml-3  text-white p-1 text-xs bg-green-400 hover:bg-green-500 font-medium tracking-wider rounded-full transition ease-in duration-300"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="h-4 w-4"
-                >
-                  <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
-                </svg>
-              </a>
-            </div>
             <div className="flex-auto justify-evenly">
               <div className="flex items-center justify-between">
                 <div className="flex items-center my-1">
@@ -71,26 +72,29 @@ const Ticket: FunctionComponent = () => {
               </div>
               <div className="border-dashed border-b-2 my-5"></div>
               <div className="flex items-center">
-                {/* 
-                    // @ts-ignore */}
-                <qr-code
-                  contents={link ?? initialLink}
-                  module-color="#7f1d1d"
-                  position-ring-color="#000000"
-                  position-center-color="#991b1b"
-                  mask-x-to-y-ratio="1.2"
-                  style={{
-                    width: "250px",
-                    height: "250px",
-                    margin: "auto",
-                  }}
-                >
-                  <img src="/classicalsliveshortcircle.png" slot="icon"></img>
-                </qr-code>
+                {isLoading ? (
+                  <div className="w-[250px] h-[250px] animate-pulse bg-gray-200 mx-auto rounded"></div>
+                ) : (
+                  <qr-code
+                    ref={ref}
+                    contents={link ?? initialLink}
+                    module-color="#7f1d1d"
+                    position-ring-color="#000000"
+                    position-center-color="#991b1b"
+                    mask-x-to-y-ratio="1.2"
+                    style={{
+                      width: "250px",
+                      height: "250px",
+                      margin: "auto",
+                    }}
+                  >
+                    <img src="/classicalsliveshortcircle.png" slot="icon"></img>
+                  </qr-code>
+                )}
               </div>
               <div className="border-dashed border-b-2 my-5 pt-5">
-                <div className="absolute rounded-full w-5 h-5 bg-red-900 -mt-2 -left-2"></div>
-                <div className="absolute rounded-full w-5 h-5 bg-red-900 -mt-2 -right-2"></div>
+                <div className="absolute rounded-full w-5 h-5 bg-gray-200 -mt-2 -left-2"></div>
+                <div className="absolute rounded-full w-5 h-5 bg-gray-200 -mt-2 -right-2"></div>
               </div>
               <div className="flex items-center mb-5 p-5 text-sm">
                 <div className="flex flex-col">
@@ -121,8 +125,8 @@ const Ticket: FunctionComponent = () => {
                 </div>
               </div>
               <div className="border-dashed border-b-2 my-5 pt-5">
-                <div className="absolute rounded-full w-5 h-5 bg-red-900 -mt-2 -left-2"></div>
-                <div className="absolute rounded-full w-5 h-5 bg-red-900 -mt-2 -right-2"></div>
+                <div className="absolute rounded-full w-5 h-5 bg-gray-200 -mt-2 -left-2"></div>
+                <div className="absolute rounded-full w-5 h-5 bg-gray-200 -mt-2 -right-2"></div>
               </div>
               <div className="flex items-center px-5 pt-3 text-sm">
                 <div className="flex flex-col">
