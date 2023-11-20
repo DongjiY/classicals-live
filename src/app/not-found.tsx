@@ -13,7 +13,7 @@ const NotFound: NextPage = () => {
         <div className="z-10 relative">
           <p className="text-red-600 font-bold">404 Error</p>
           <h1 className="text-4xl font-fancy font-bold">Page Not Found</h1>
-          <pre className="mt-1 text-gray-500 dark:text-gray-400">
+          <pre className="mt-1 text-gray-500 dark:text-gray-400 whitespace-normal">
             Sorry, the page you are looking for doesn&apos;t exist.
           </pre>
           <div className="flex items-center mt-6 gap-x-3">
@@ -21,7 +21,7 @@ const NotFound: NextPage = () => {
 
             <Link
               href="/"
-              className="w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-red-600 rounded shrink-0 sm:w-auto hover:bg-red-700"
+              className="w-max px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-red-600 rounded shrink-0 sm:w-auto hover:bg-red-700"
             >
               Take me home
             </Link>
