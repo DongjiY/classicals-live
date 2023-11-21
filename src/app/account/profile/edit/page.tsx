@@ -3,7 +3,7 @@ import { UserContext } from "@/util/UserContext";
 import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useContext, useState } from "react";
+import { SyntheticEvent, useContext, useState } from "react";
 
 const EditProfilePage: NextPage = () => {
   const user = useContext(UserContext);
@@ -12,7 +12,9 @@ const EditProfilePage: NextPage = () => {
   const [email, setEmail] = useState<string>();
   const [error, setError] = useState<boolean>(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+
     const body: { name?: string; email?: string } = {};
     if (name !== user?.name) {
       body.name = name;
