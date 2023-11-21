@@ -9,6 +9,7 @@ const NewPerfForm: FunctionComponent = () => {
   const [error, setError] = useState<Boolean>(false);
   const [numPieces, setNumPieces] = useState<number>(1);
   const [numPerfs, setNumPerfs] = useState<number>(0);
+  const [useCLTicket, setUseCLTicket] = useState<boolean>(false);
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -64,6 +65,7 @@ const NewPerfForm: FunctionComponent = () => {
           name: e.currentTarget.locationName.value,
         },
         originalLink: e.currentTarget.link.value,
+        usesCLTicket: useCLTicket,
       };
 
       body.searchString = `${body.searchString} ${body.group.groupName}`;
@@ -238,7 +240,7 @@ const NewPerfForm: FunctionComponent = () => {
           onClick={() => {
             setNumPieces(numPieces + 1);
           }}
-          className="w-2/3 mx-auto bg-green-500 text-white py-1.5 rounded-lg hover:opacity-70 duration-200"
+          className="w-2/3 mx-auto bg-blue-500 text-white py-1.5 rounded-lg hover:opacity-70 duration-200"
         >
           Add Piece
         </button>
@@ -326,8 +328,9 @@ const NewPerfForm: FunctionComponent = () => {
             type="url"
             name="link"
             className="h-8 border-2 rounded-md w-full dark:text-black"
-            required
             placeholder="ex. https://your-site-here"
+            disabled={useCLTicket}
+            required={!useCLTicket}
           />
         </div>
       </div>
@@ -342,6 +345,18 @@ const NewPerfForm: FunctionComponent = () => {
           value="Add Performance Time"
         ></input>
       </div>
+      <div className="font-modern flex items-center gap-x-2 flex-wrap bg-purple-100 text-black px-4 py-2 rounded mx-4">
+        <input
+          type="checkbox"
+          className="w-4 h-4"
+          onChange={() => setUseCLTicket(!useCLTicket)}
+        />
+        <div className="bg-purple-500 w-max px-2 py-1 rounded-full text-white">
+          Beta
+        </div>
+        <p>Use the Classicals.Live ticketing system for this performance.</p>
+      </div>
+      <br></br>
       <div className="pr-4 flex justify-between">
         <p>
           <span className="text-red-600">*</span>=required field
