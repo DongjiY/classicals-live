@@ -73,7 +73,9 @@ const Ticket: FunctionComponent = () => {
               <div className="border-dashed border-b-2 my-5"></div>
               <div className="flex items-center">
                 {isLoading ? (
-                  <div className="w-[250px] h-[250px] animate-pulse bg-gray-200 mx-auto rounded"></div>
+                  <div className="mx-auto w-[250px] h-[250px] flex items-center justify-center">
+                    <img src="/assets/90-ring-with-bg.svg"></img>
+                  </div>
                 ) : (
                   <qr-code
                     ref={ref}

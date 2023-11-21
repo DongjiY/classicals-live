@@ -2,12 +2,20 @@
 import { ReactNode } from "react";
 import Logo from "../_components/Logo";
 import useUser from "../_hooks/useUser";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import { UserContext } from "@/util/UserContext";
 
 export default function Layout({ children }: { children: ReactNode }) {
+  const path = usePathname();
   const router = useRouter();
   const { user, isLoading, error } = useUser();
+
+  const useActiveTabStyle = (match: string): string => {
+    if (path === match)
+      return "middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize";
+    return "middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize";
+  };
 
   if (!isLoading && (error || user === undefined)) {
     router.push("/");
@@ -17,7 +25,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         <nav className="bg-gray-300 xl:hidden py-3">
           <ul className="flex justify-evenly">
             <li>
-              <Link
+              <a
                 href="/account"
                 className="flex flex-col gap-x-1 items-center flex-wrap"
               >
@@ -30,7 +38,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                   <path d="M1 4.25a3.733 3.733 0 012.25-.75h13.5c.844 0 1.623.279 2.25.75A2.25 2.25 0 0016.75 2H3.25A2.25 2.25 0 001 4.25zM1 7.25a3.733 3.733 0 012.25-.75h13.5c.844 0 1.623.279 2.25.75A2.25 2.25 0 0016.75 5H3.25A2.25 2.25 0 001 7.25zM7 8a1 1 0 011 1 2 2 0 104 0 1 1 0 011-1h3.75A2.25 2.25 0 0119 10.25v5.5A2.25 2.25 0 0116.75 18H3.25A2.25 2.25 0 011 15.75v-5.5A2.25 2.25 0 013.25 8H7z" />
                 </svg>
                 <p>Wallet</p>
-              </Link>
+              </a>
             </li>
             <li>
               <Link
@@ -105,36 +113,13 @@ export default function Layout({ children }: { children: ReactNode }) {
             <div className="px-2 py-3 flex items-center justify-center w-full">
               <Logo forceDark={true} />
             </div>
-
-            <button
-              className="middle none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[32px] h-8 max-h-[32px] rounded-lg text-xs text-white hover:bg-white/10 active:bg-white/30 absolute right-0 top-0 grid rounded-br-none rounded-tl-none xl:hidden"
-              type="button"
-            >
-              <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                  className="h-5 w-5 text-white"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                  ></path>
-                </svg>
-              </span>
-            </button>
           </div>
           <div className="m-4">
             <ul className="mb-4 flex flex-col gap-1">
               <li>
-                <Link aria-current="page" className="active" href="/account">
+                <a aria-current="page" className="active" href="/account">
                   <button
-                    className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize"
+                    className={useActiveTabStyle("/account")}
                     type="button"
                   >
                     <svg
@@ -150,12 +135,12 @@ export default function Layout({ children }: { children: ReactNode }) {
                       Wallet
                     </p>
                   </button>
-                </Link>
+                </a>
               </li>
               <li>
-                <Link className="" href="#">
+                <Link className="" href="/account/profile">
                   <button
-                    className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                    className={useActiveTabStyle("/account/profile")}
                     type="button"
                   >
                     <svg
@@ -180,7 +165,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               <li>
                 <Link className="" href="/account/myconcerts">
                   <button
-                    className="middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                    className={useActiveTabStyle("/account/myconcerts")}
                     type="button"
                   >
                     <svg
@@ -233,7 +218,9 @@ export default function Layout({ children }: { children: ReactNode }) {
             </ul>
           </div>
         </aside>
-        <div className="p-4 xl:ml-80">{children}</div>
+        <div className="p-4 xl:ml-80">
+          <UserContext.Provider value={user}>{children}</UserContext.Provider>
+        </div>
       </div>
     );
   }
