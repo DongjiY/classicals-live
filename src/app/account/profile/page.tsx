@@ -26,7 +26,7 @@ const ProfilePage: NextPage = () => {
         </div>
         <Link
           className="bg-red-700 w-max px-6 py-1 rounded-lg text-white mt-3"
-          href="account/profile/edit"
+          href="/account/profile/edit"
         >
           Edit
         </Link>
