@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const router = useRouter();
   const { user, isLoading, error } = useUser();
 
-  const useActiveTabStyle = (match: string): string => {
+  const applyActiveTabStyle = (match: string): string => {
     if (path === match)
       return "middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md shadow-blue-500/20 hover:shadow-lg hover:shadow-blue-500/40 active:opacity-[0.85] w-full flex items-center gap-4 px-4 capitalize";
     return "middle none font-sans font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize";
@@ -119,7 +119,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               <li>
                 <a aria-current="page" className="active" href="/account">
                   <button
-                    className={useActiveTabStyle("/account")}
+                    className={applyActiveTabStyle("/account")}
                     type="button"
                   >
                     <svg
@@ -140,7 +140,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               <li>
                 <Link className="" href="/account/profile">
                   <button
-                    className={useActiveTabStyle("/account/profile")}
+                    className={applyActiveTabStyle("/account/profile")}
                     type="button"
                   >
                     <svg
@@ -165,7 +165,7 @@ export default function Layout({ children }: { children: ReactNode }) {
               <li>
                 <Link className="" href="/account/myconcerts">
                   <button
-                    className={useActiveTabStyle("/account/myconcerts")}
+                    className={applyActiveTabStyle("/account/myconcerts")}
                     type="button"
                   >
                     <svg
