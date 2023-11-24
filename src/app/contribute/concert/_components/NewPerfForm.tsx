@@ -89,6 +89,8 @@ const NewPerfForm: FunctionComponent = () => {
             if (!user) {
               const redirectURL = `https://classicals.live/contribute/link?concertid=${data.id}`;
               router.push(`/login?redirect=${redirectURL}`);
+            } else {
+              router.push("/contribute/concert/success");
             }
           } else {
             router.push("/contribute/concert/success");
