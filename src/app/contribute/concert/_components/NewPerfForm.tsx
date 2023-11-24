@@ -3,8 +3,10 @@
 import { useRouter } from "next/navigation";
 import { FunctionComponent, SyntheticEvent, useState } from "react";
 import AutocompleteInputField from "./AutocompleteInputField";
+import useUser from "@/app/_hooks/useUser";
 
 const NewPerfForm: FunctionComponent = () => {
+  const { user } = useUser();
   const router = useRouter();
   const [error, setError] = useState<Boolean>(false);
   const [numPieces, setNumPieces] = useState<number>(1);
@@ -66,6 +68,7 @@ const NewPerfForm: FunctionComponent = () => {
         },
         originalLink: e.currentTarget.link.value,
         usesCLTicket: useCLTicket,
+        concertOwner: user?._id ?? null,
       };
 
       body.searchString = `${body.searchString} ${body.group.groupName}`;
@@ -79,9 +82,15 @@ const NewPerfForm: FunctionComponent = () => {
         },
         body: JSON.stringify(body),
       })
-        .then((res) => {
-          console.log(res);
-          if (res.status === 201) {
+        .then((res) => res.json())
+        .then((data) => {
+          if (useCLTicket) {
+            // if user not logged in then force login
+            if (!user) {
+              const redirectURL = `https://api.classicals.live/concerts/link/${data.id}`;
+              router.push(`/login?redirect=${redirectURL}`);
+            }
+          } else {
             router.push("/contribute/concert/success");
           }
         })
