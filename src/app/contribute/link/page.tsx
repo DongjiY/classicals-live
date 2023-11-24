@@ -11,7 +11,11 @@ const LinkPage: NextPage = () => {
     fetch(
       `https://api.classicals.live/concerts/link/${searchParams.get(
         "concertid"
-      )}`
+      )}`,
+      {
+        mode: "cors",
+        credentials: "include",
+      }
     )
       .then((res) => {
         if (res.status === 200) {
