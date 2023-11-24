@@ -87,7 +87,7 @@ const NewPerfForm: FunctionComponent = () => {
           if (useCLTicket) {
             // if user not logged in then force login
             if (!user) {
-              const redirectURL = `https://api.classicals.live/concerts/link/${data.id}`;
+              const redirectURL = `https://classicals.live/contribute/link?concertid=${data.id}`;
               router.push(`/login?redirect=${redirectURL}`);
             }
           } else {
