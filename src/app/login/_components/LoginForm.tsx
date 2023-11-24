@@ -1,11 +1,12 @@
 "use client";
 import Logo from "@/app/_components/Logo";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FunctionComponent, SyntheticEvent, useState } from "react";
 
 const LoginForm: FunctionComponent = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string>();
 
@@ -19,6 +20,7 @@ const LoginForm: FunctionComponent = () => {
       },
       body: JSON.stringify({
         destination: email,
+        onSuccessRedirect: searchParams.get("redirect"),
       }),
       credentials: "include",
       mode: "cors",

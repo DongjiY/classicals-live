@@ -22,7 +22,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   } else {
     return (
       <div className="min-h-screen bg-gray-50/50 dark:bg-gray-50">
-        <nav className="bg-gray-300 xl:hidden py-3">
+        <nav className="bg-gray-300 xl:hidden py-3 sticky top-0 z-[1000] shadow-md">
           <ul className="flex justify-evenly">
             <li>
               <a
@@ -71,13 +71,9 @@ export default function Layout({ children }: { children: ReactNode }) {
                   fill="currentColor"
                   className="w-5 h-5"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M17.721 1.599a.75.75 0 01.279.584v11.29a2.25 2.25 0 01-1.774 2.198l-2.041.442a2.216 2.216 0 01-.938-4.333l2.662-.576a.75.75 0 00.591-.734V6.112l-8 1.73v7.684a2.25 2.25 0 01-1.774 2.2l-2.042.44a2.216 2.216 0 11-.935-4.33l2.659-.574A.75.75 0 007 12.53V4.237a.75.75 0 01.591-.733l9.5-2.054a.75.75 0 01.63.149z"
-                    clipRule="evenodd"
-                  />
+                  <path d="M2 4.25A2.25 2.25 0 014.25 2h2.5A2.25 2.25 0 019 4.25v2.5A2.25 2.25 0 016.75 9h-2.5A2.25 2.25 0 012 6.75v-2.5zM2 13.25A2.25 2.25 0 014.25 11h2.5A2.25 2.25 0 019 13.25v2.5A2.25 2.25 0 016.75 18h-2.5A2.25 2.25 0 012 15.75v-2.5zM11 4.25A2.25 2.25 0 0113.25 2h2.5A2.25 2.25 0 0118 4.25v2.5A2.25 2.25 0 0115.75 9h-2.5A2.25 2.25 0 0111 6.75v-2.5zM15.25 11.75a.75.75 0 00-1.5 0v2h-2a.75.75 0 000 1.5h2v2a.75.75 0 001.5 0v-2h2a.75.75 0 000-1.5h-2v-2z" />
                 </svg>
-                <p>My Concerts</p>
+                <p>Admin</p>
               </Link>
             </li>
             <li>
@@ -177,11 +173,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                       fill="currentColor"
                       className="w-5 h-5"
                     >
-                      <path
-                        fillRule="evenodd"
-                        d="M17.721 1.599a.75.75 0 01.279.584v11.29a2.25 2.25 0 01-1.774 2.198l-2.041.442a2.216 2.216 0 01-.938-4.333l2.662-.576a.75.75 0 00.591-.734V6.112l-8 1.73v7.684a2.25 2.25 0 01-1.774 2.2l-2.042.44a2.216 2.216 0 11-.935-4.33l2.659-.574A.75.75 0 007 12.53V4.237a.75.75 0 01.591-.733l9.5-2.054a.75.75 0 01.63.149z"
-                        clipRule="evenodd"
-                      />
+                      <path d="M2 4.25A2.25 2.25 0 014.25 2h2.5A2.25 2.25 0 019 4.25v2.5A2.25 2.25 0 016.75 9h-2.5A2.25 2.25 0 012 6.75v-2.5zM2 13.25A2.25 2.25 0 014.25 11h2.5A2.25 2.25 0 019 13.25v2.5A2.25 2.25 0 016.75 18h-2.5A2.25 2.25 0 012 15.75v-2.5zM11 4.25A2.25 2.25 0 0113.25 2h2.5A2.25 2.25 0 0118 4.25v2.5A2.25 2.25 0 0115.75 9h-2.5A2.25 2.25 0 0111 6.75v-2.5zM15.25 11.75a.75.75 0 00-1.5 0v2h-2a.75.75 0 000 1.5h2v2a.75.75 0 001.5 0v-2h2a.75.75 0 000-1.5h-2v-2z" />
                     </svg>
                     <p className="block  font-sans text-base leading-relaxed text-inherit font-medium capitalize">
                       My Concerts
