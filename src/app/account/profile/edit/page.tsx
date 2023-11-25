@@ -59,7 +59,7 @@ const EditProfilePage: NextPage = () => {
                 <div className="space-y-6">
                   <input
                     className="w-full bg-transparent text-gray-600 rounded-md border border-gray-300 px-3 py-2 text-sm placeholder-gray-600 invalid:border-red-500"
-                    placeholder="Your Password"
+                    placeholder="New Account Name"
                     type="text"
                     name="name"
                     onChange={(e) => setName(e.currentTarget.value)}
