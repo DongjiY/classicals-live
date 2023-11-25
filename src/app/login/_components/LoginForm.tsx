@@ -29,7 +29,15 @@ const LoginForm: FunctionComponent = () => {
         if (res.status === 201) {
           router.push("/login/sent");
         } else {
-          router.push(`/register?email=${email}`);
+          if (searchParams.get("redirect")) {
+            router.push(
+              `/register?email=${email}&redirect=${searchParams.get(
+                "redirect"
+              )}`
+            );
+          } else {
+            router.push(`/register?email=${email}`);
+          }
         }
       })
       .catch((err) => {
@@ -73,7 +81,11 @@ const LoginForm: FunctionComponent = () => {
               </div>
             </div>
             <Link
-              href="/register"
+              href={
+                searchParams.get("redirect")
+                  ? `/register?redirect=${searchParams.get("redirect")}`
+                  : "/register"
+              }
               type="button"
               className="text-center w-full border-red-800 hover:border-red-700 hover:border-[2px] border-[1px] rounded-3xl p-3 text-red-700 font-bold transition duration-200"
             >

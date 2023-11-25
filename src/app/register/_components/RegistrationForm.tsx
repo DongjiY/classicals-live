@@ -29,7 +29,11 @@ const RegistrationForm: FunctionComponent = () => {
     })
       .then((res) => {
         if (res.status === 201) {
-          router.push("/login");
+          if (searchParams.get("redirect")) {
+            router.push(`/login?redirect=${searchParams.get("redirect")}`);
+          } else {
+            router.push("/login");
+          }
         }
       })
       .catch((err) => {
