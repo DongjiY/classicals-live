@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const SettingsPage: NextPage = () => {
   return (
-    <main className="text-black">
+    <main className="text-black p-4">
       <h1 className="font-modern text-3xl font-bold tracking-wider mb-4">
         Settings
       </h1>
