@@ -3,7 +3,7 @@ import Ticket from "./_components/ticket";
 
 const AccountHome: NextPage = () => {
   return (
-    <main>
+    <main className="p-4">
       <h1 className="font-modern text-3xl font-bold tracking-wider mb-4">
         My Tickets
       </h1>

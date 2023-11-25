@@ -236,7 +236,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             </ul>
           </div>
         </aside>
-        <div className="p-4 xl:ml-80">
+        <div className="xl:p-4 xl:ml-80">
           <UserContext.Provider value={user}>{children}</UserContext.Provider>
         </div>
       </div>

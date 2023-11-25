@@ -102,9 +102,11 @@ const ScanTicketPage: NextPage = () => {
   }, []);
 
   return (
-    <main>
+    <main className="overflow-hidden max-h-[calc(100vh-4.2rem)] flex flex-col items-center">
       <canvas className="rounded-xl" ref={canvas} hidden></canvas>
-      <video className="rounded-xl duration-200" ref={video}></video>
+      <div className="p-4">
+        <video className="rounded-xl" ref={video}></video>
+      </div>
       <div
         className={
           error
