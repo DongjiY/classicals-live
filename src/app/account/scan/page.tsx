@@ -102,23 +102,23 @@ const ScanTicketPage: NextPage = () => {
   }, []);
 
   return (
-    <main className="overflow-hidden max-h-[calc(100vh-4.2rem)] flex flex-col items-center">
-      <canvas className="rounded-xl" ref={canvas} hidden></canvas>
-      <div className="p-4">
+    <main className="overflow-hidden h-full flex flex-col items-center relative">
+      <section className="h-[calc(100vh-4.25rem)] pb-8 px-4 pt-4">
+        <canvas className="rounded-xl" ref={canvas} hidden></canvas>
         <video className="rounded-xl" ref={video}></video>
-      </div>
-      <div
-        className={
-          error
-            ? "bg-red-100 rounded-lg border-l-4 border-red-600 py-4 px-2 mb-2"
-            : "hidden"
-        }
-      >
-        <p>Please enable camera access to scan tickets!</p>
-      </div>
-      <div className="bg-gray-200 rounded-lg border-l-4 border-gray-500 py-4 px-2 mt-2">
-        <p>Hold the QR code in the camera viewport</p>
-      </div>
+        <div
+          className={
+            error
+              ? "bg-red-100 rounded-lg border-l-4 border-red-600 py-4 px-2 mb-2"
+              : "hidden"
+          }
+        >
+          <p>Please enable camera access to scan tickets!</p>
+        </div>
+        <div className="bg-gray-200 rounded-lg border-l-4 border-gray-500 py-4 px-2 mt-2">
+          <p>Hold the QR code in the camera viewport</p>
+        </div>
+      </section>
 
       <div ref={modal} className={`${styles.modal} ${styles.closed}`}>
         <div className="w-full h-full flex flex-col items-center">
