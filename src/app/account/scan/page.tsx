@@ -120,7 +120,7 @@ const ScanTicketPage: NextPage = () => {
         </div>
       </section>
 
-      <div ref={modal} className={`${styles.modal} ${""}`}>
+      <div ref={modal} className={`${styles.modal} ${styles.closed}`}>
         <div className="w-full h-full flex flex-col items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
