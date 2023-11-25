@@ -106,7 +106,7 @@ const ConcertInfo: FunctionComponent<Props> = ({ id }) => {
               {data?.pieces.map((piece, index) => (
                 <li
                   key={index}
-                  className="flex flex-wrap flex-col md:flex-row justify-between border-b-2 py-4"
+                  className="flex flex-wrap flex-col md:flex-row justify-between border-b-2 py-4 overflow-x-auto"
                 >
                   <h3 className="text-md whitespace-nowrap">
                     {piece.pieceName}
