@@ -12,7 +12,7 @@ export const dummy_ticket: Array<Ticket> = [
       },
       dateAndTimeInfo: 1701648778,
     },
-    ticketBottom: { data: { attendee: "Kelly Holl" } },
+    ticketBottom: { data: { attendee: "Dongji Yang" } },
     ticketOwner: "6559412ffd1af853ddd5d522",
     isValid: true,
     __v: 0,
