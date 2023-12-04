@@ -1,7 +1,7 @@
 "use client";
 import { FunctionComponent } from "react";
 import useConcertData from "../_hooks/useConcertData";
-import { unixToDate, unixToTime } from "@/util/dateconverters";
+import { unixToDate, unixToDateShort, unixToTime } from "@/util/dateconverters";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
 
 type Props = {
@@ -9,6 +9,20 @@ type Props = {
 };
 const ConcertInfo: FunctionComponent<Props> = ({ id }) => {
   const { isLoading, data } = useConcertData(id);
+
+  const shareConcert = () => {
+    const shareData = {
+      title: data?.group.groupName,
+      text: `Check out this concert on Classicals.live on ${unixToDateShort(
+        data?.performanceTime!
+      )}`,
+      url: `https://classicals.live/concerts/${id}`,
+    };
+
+    navigator.share(shareData).catch((err) => {
+      console.error(err);
+    });
+  };
 
   if (isLoading) {
     return (
@@ -124,11 +138,11 @@ const ConcertInfo: FunctionComponent<Props> = ({ id }) => {
         <br></br>
         <section className="bg-white w-full md:w-1/2 mx-auto px-4 pb-8 pt-2 font-dongji shadow dark:bg-gray-700 dark:text-white">
           <h1 className="text-lg pt-2 font-semibold">Actions</h1>
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap items-center">
             <span className="-ml-[8px]">
               <AddToCalendarButton
                 name={data?.group.groupName}
-                styleLight="--btn-background: #f5f5f5; --btn-shadow: none; --btn-margin: 0px;"
+                styleLight="--btn-background: #f3f4f6; --btn-shadow: none; --btn-border: 0px;"
                 startDate={
                   new Date(data?.performanceTime! * 1000)
                     .toISOString()
@@ -155,6 +169,21 @@ const ConcertInfo: FunctionComponent<Props> = ({ id }) => {
                 description={`This is an auto-generated calendar invite for a concert from Classicals.Live. To view more details, follow this link: [url]https://classicals.live/concert/${data?.id}[/url]`}
               ></AddToCalendarButton>
             </span>
+
+            <button
+              onClick={shareConcert}
+              className="flex items-center gap-x-2 text-black bg-gray-100 h-[45px] px-3 rounded-md"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="w-5 h-5"
+              >
+                <path d="M13 4.5a2.5 2.5 0 11.702 1.737L6.97 9.604a2.518 2.518 0 010 .792l6.733 3.367a2.5 2.5 0 11-.671 1.341l-6.733-3.367a2.5 2.5 0 110-3.475l6.733-3.366A2.52 2.52 0 0113 4.5z" />
+              </svg>
+              <p className="font-semibold">Share</p>
+            </button>
           </div>
         </section>
       </>
