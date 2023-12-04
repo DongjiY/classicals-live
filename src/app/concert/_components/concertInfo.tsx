@@ -3,6 +3,7 @@ import { FunctionComponent } from "react";
 import useConcertData from "../_hooks/useConcertData";
 import { unixToDate, unixToDateShort, unixToTime } from "@/util/dateconverters";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
+import Swal from "sweetalert2";
 
 type Props = {
   id: string;
@@ -11,17 +12,44 @@ const ConcertInfo: FunctionComponent<Props> = ({ id }) => {
   const { isLoading, data } = useConcertData(id);
 
   const shareConcert = () => {
+    const url = `https://classicals.live/concert/${id}`;
     const shareData = {
       title: data?.group.groupName,
       text: `Check out this concert on Classicals.live on ${unixToDateShort(
         data?.performanceTime!
       )}`,
-      url: `https://classicals.live/concerts/${id}`,
+      url: url,
     };
-
-    navigator.share(shareData).catch((err) => {
-      console.error(err);
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
     });
+
+    try {
+      navigator.share(shareData).catch((err) => {
+        console.error(err);
+      });
+    } catch (err) {
+      console.error(err);
+      navigator.clipboard
+        .writeText(url)
+        .then(() => {
+          Toast.fire({
+            icon: "success",
+            title: "Link Copied to Clipboard",
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   };
 
   if (isLoading) {
