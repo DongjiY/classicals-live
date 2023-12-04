@@ -2,6 +2,7 @@
 import { FunctionComponent } from "react";
 import useConcertData from "../_hooks/useConcertData";
 import { unixToDate, unixToTime } from "@/util/dateconverters";
+import { AddToCalendarButton } from "add-to-calendar-button-react";
 
 type Props = {
   id: string;
@@ -120,9 +121,42 @@ const ConcertInfo: FunctionComponent<Props> = ({ id }) => {
           </div>
         </section>
 
-        {/* <section className="bg-white w-full md:w-1/2 mx-auto px-4 pb-8 pt-2 font-dongji mt-8 shadow">
-          <h1>Comments</h1>
-        </section> */}
+        <br></br>
+        <section className="bg-white w-full md:w-1/2 mx-auto px-4 pb-8 pt-2 font-dongji shadow dark:bg-gray-700 dark:text-white">
+          <h1 className="text-lg pt-2 font-semibold">Actions</h1>
+          <div className="flex flex-wrap">
+            <span className="-ml-[8px]">
+              <AddToCalendarButton
+                name={data?.group.groupName}
+                styleLight="--btn-background: #f5f5f5; --btn-shadow: none; --btn-margin: 0px;"
+                startDate={
+                  new Date(data?.performanceTime! * 1000)
+                    .toISOString()
+                    .split("T")[0]
+                }
+                startTime={`${new Date(data?.performanceTime! * 1000)
+                  .getHours()
+                  .toString()
+                  .padStart(2, "0")}:${new Date(data?.performanceTime! * 1000)
+                  .getMinutes()
+                  .toString()
+                  .padStart(2, "0")}`}
+                endTime={`${(
+                  new Date(data?.performanceTime! * 1000).getHours() + 1
+                )
+                  .toString()
+                  .padStart(2, "0")}:${new Date(data?.performanceTime! * 1000)
+                  .getMinutes()
+                  .toString()
+                  .padStart(2, "0")}`}
+                options={["Apple", "Google"]}
+                timeZone="currentBrowser"
+                location={data?.location.name ?? "N/A"}
+                description={`This is an auto-generated calendar invite for a concert from Classicals.Live. To view more details, follow this link: [url]https://classicals.live/concert/${data?.id}[/url]`}
+              ></AddToCalendarButton>
+            </span>
+          </div>
+        </section>
       </>
     );
   }
