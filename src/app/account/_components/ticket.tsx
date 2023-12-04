@@ -5,12 +5,17 @@ import * as qr from "@bitjson/qr-code";
 import Link from "next/link";
 import useInitialQRLink from "../_hooks/useInitialQRLink";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { Ticket } from "@/types/Ticket";
+import { unixToDateShort, unixToTime } from "@/util/dateconverters";
 
-const Ticket: FunctionComponent = () => {
+type Props = {
+  ticket: Ticket;
+};
+const Ticket: FunctionComponent<Props> = ({ ticket }) => {
   const ref = useRef(null);
   const animatedOnceRef = useRef<boolean>(false);
   const [link, setLink] = useState<string>();
-  const { initialLink, isLoading } = useInitialQRLink();
+  const { initialLink, isLoading } = useInitialQRLink(ticketId);
 
   useEffect(() => {
     qr.defineCustomElements(window);
@@ -30,6 +35,37 @@ const Ticket: FunctionComponent = () => {
     } catch (err) {}
   }, [isLoading]);
 
+  const generateTop = () => {
+    const res = [];
+    for (const attribute in ticket.ticketTop) {
+      res.push(
+        <div className="flex flex-col">
+          <span className="text-sm">
+            {attribute.charAt(0).toUpperCase() + attribute.slice(1)}
+          </span>
+          <div className="font-semibold">{ticket.ticketTop[attribute]}</div>
+        </div>
+      );
+    }
+    return res;
+  };
+
+  const generateBottom = () => {
+    const res = [];
+    for (const attribute in ticket.ticketBottom.data) {
+      res.push(
+        <div className="flex flex-col">
+          <span className="">
+            {attribute.charAt(0).toUpperCase() + attribute.slice(1)}
+          </span>
+          <div className="font-semibold">
+            {ticket.ticketBottom.data[attribute]}
+          </div>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="max-w-md w-full h-full z-10 bg-gray-200 rounded-3xl">
       <div className="flex flex-col">
@@ -38,9 +74,7 @@ const Ticket: FunctionComponent = () => {
             <div className="flex-auto justify-evenly">
               <div className="flex items-center justify-between">
                 <div className="flex items-center my-1">
-                  <h2 className="font-medium text-lg">
-                    Dallas Symphony Orchestra
-                  </h2>
+                  <h2 className="font-medium text-lg">{ticket.ticketTitle}</h2>
                 </div>
 
                 <CountdownCircleTimer
@@ -57,7 +91,7 @@ const Ticket: FunctionComponent = () => {
                         "Content-Type": "application/json",
                       },
                       body: JSON.stringify({
-                        test: "data",
+                        ticketId: ticketId,
                       }),
                       credentials: "include",
                       mode: "cors",
@@ -99,31 +133,20 @@ const Ticket: FunctionComponent = () => {
                 <div className="absolute rounded-full w-5 h-5 bg-gray-200 -mt-2 -right-2"></div>
               </div>
               <div className="flex items-center mb-5 p-5 text-sm">
-                <div className="flex flex-col">
-                  <span className="text-sm">Aisle</span>
-                  <div className="font-semibold">3</div>
-                </div>
-                <div className="flex flex-col ml-auto">
-                  <span className="text-sm">Section</span>
-                  <div className="font-semibold">Orch Center</div>
-                </div>
-                <div className="flex flex-col ml-auto">
-                  <span className="text-sm">Row</span>
-                  <div className="font-semibold">E</div>
-                </div>
-                <div className="flex flex-col ml-auto">
-                  <span className="text-sm">Seat</span>
-                  <div className="font-semibold">10</div>
-                </div>
+                {generateTop()}
               </div>
               <div className="flex items-center mb-4 px-5">
                 <div className="flex flex-col text-sm">
                   <span className="">Date</span>
-                  <div className="font-semibold">FRI Nov. 12</div>
+                  <div className="font-semibold">
+                    {unixToDateShort(ticket.ticketTop.dateAndTimeInfo)}
+                  </div>
                 </div>
                 <div className="flex flex-col mx-auto text-sm">
                   <span className="">Time</span>
-                  <div className="font-semibold">11:30pm</div>
+                  <div className="font-semibold">
+                    {unixToTime(ticket.ticketTop.dateAndTimeInfo)}
+                  </div>
                 </div>
               </div>
               <div className="border-dashed border-b-2 my-5 pt-5">
@@ -131,10 +154,7 @@ const Ticket: FunctionComponent = () => {
                 <div className="absolute rounded-full w-5 h-5 bg-gray-200 -mt-2 -right-2"></div>
               </div>
               <div className="flex items-center px-5 pt-3 text-sm">
-                <div className="flex flex-col">
-                  <span className="">Attendee</span>
-                  <div className="font-semibold">Dongji Yang</div>
-                </div>
+                {generateBottom()}
               </div>
               <br></br>
               <Link
