@@ -29,8 +29,8 @@ const MyConcertsList: FunctionComponent = () => {
                 {[item._source.performanceTime]
                   .concat(item._source.additionalPerformanceTimes ?? [])
                   .sort()
-                  .map((time: number) => (
-                    <span>{unixToDate(time)}</span>
+                  .map((time: number, index: number) => (
+                    <span key={index}>{unixToDate(time)}&nbsp;</span>
                   ))}
               </p>
             </div>
