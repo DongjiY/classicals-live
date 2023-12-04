@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import MyConcertsList from "./_components/myconcertslist";
 
 const MyConcertsPage: NextPage = () => {
   return (
@@ -6,6 +7,7 @@ const MyConcertsPage: NextPage = () => {
       <h1 className="font-modern text-3xl font-bold tracking-wider mb-4">
         My Concerts
       </h1>
+      <MyConcertsList />
     </main>
   );
 };
