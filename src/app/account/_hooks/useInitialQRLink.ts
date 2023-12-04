@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useInitialQRLink() {
+export default function useInitialQRLink(id: string) {
   const [qrData, setQrData] = useState<string>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -11,7 +11,7 @@ export default function useInitialQRLink() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        test: "data",
+        ticketId: id,
       }),
       credentials: "include",
       mode: "cors",

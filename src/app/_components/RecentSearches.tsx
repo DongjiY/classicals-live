@@ -59,7 +59,7 @@ const RecentSearches: FunctionComponent = () => {
         <div
           className={
             displayLeftScroller
-              ? "absolute top-0 left-0 bg-white rounded-full flex justify-center items-center p-1 border-2 shadow-lg !-translate-x-[55%] m-auto bottom-0 h-max dark:bg-gray-700 dark:border-gray-600"
+              ? "cursor-pointer hover:opacity-90 absolute top-0 left-0 bg-white rounded-full flex justify-center items-center p-1 border-2 shadow-lg !-translate-x-[55%] m-auto bottom-0 h-max dark:bg-gray-700 dark:border-gray-600"
               : "hidden"
           }
           onClick={() => {
@@ -90,7 +90,7 @@ const RecentSearches: FunctionComponent = () => {
         <div
           className={
             displayRightScroller
-              ? "absolute top-0 right-0 bg-white rounded-full flex justify-center items-center p-1 border-2 shadow-lg !translate-x-[55%] m-auto bottom-0 h-max dark:bg-gray-700 dark:border-gray-600"
+              ? "cursor-pointer hover:opacity-90 absolute top-0 right-0 bg-white rounded-full flex justify-center items-center p-1 border-2 shadow-lg !translate-x-[55%] m-auto bottom-0 h-max dark:bg-gray-700 dark:border-gray-600"
               : "hidden"
           }
           onClick={() => {
