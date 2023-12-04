@@ -1,4 +1,3 @@
-//@ts-nocheck
 "use client";
 import { FunctionComponent, useEffect, useRef, useState } from "react";
 import * as qr from "@bitjson/qr-code";
@@ -20,9 +19,10 @@ const Ticket: FunctionComponent<Props> = ({ ticket }) => {
   useEffect(() => {
     qr.defineCustomElements(window);
 
-    try {
-      ref.current.addEventListener("codeRendered", () => {
+    if (ref.current) {
+      (ref.current as HTMLElement).addEventListener("codeRendered", () => {
         if (animatedOnceRef.current) return;
+        // @ts-ignore
         ref.current.animateQRCode((targets, _x, _y, _count, entity) => ({
           targets,
           from: entity === "module" ? Math.random() * 200 : 200,
@@ -32,18 +32,18 @@ const Ticket: FunctionComponent<Props> = ({ ticket }) => {
         }));
         animatedOnceRef.current = true;
       });
-    } catch (err) {}
+    }
   }, [isLoading]);
 
   const generateTop = () => {
     const res = [];
-    for (const attribute in ticket.ticketTop) {
+    for (const [key, value] of Object.entries(ticket.ticketTop.seatingInfo)) {
       res.push(
         <div className="flex flex-col">
           <span className="text-sm">
-            {attribute.charAt(0).toUpperCase() + attribute.slice(1)}
+            {key.charAt(0).toUpperCase() + key.slice(1)}
           </span>
-          <div className="font-semibold">{ticket.ticketTop[attribute]}</div>
+          <div className="font-semibold">{value}</div>
         </div>
       );
     }
@@ -52,18 +52,15 @@ const Ticket: FunctionComponent<Props> = ({ ticket }) => {
 
   const generateBottom = () => {
     const res = [];
-    for (const attribute in ticket.ticketBottom.data) {
+    for (const [key, value] of Object.entries(ticket.ticketBottom.data)) {
       res.push(
         <div className="flex flex-col">
-          <span className="">
-            {attribute.charAt(0).toUpperCase() + attribute.slice(1)}
-          </span>
-          <div className="font-semibold">
-            {ticket.ticketBottom.data[attribute]}
-          </div>
+          <span className="">{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+          <div className="font-semibold">{value}</div>
         </div>
       );
     }
+    return res;
   };
 
   return (
@@ -111,6 +108,7 @@ const Ticket: FunctionComponent<Props> = ({ ticket }) => {
                     <img src="/assets/90-ring-with-bg.svg"></img>
                   </div>
                 ) : (
+                  // @ts-ignore
                   <qr-code
                     ref={ref}
                     contents={link ?? initialLink}
