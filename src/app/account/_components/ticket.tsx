@@ -15,7 +15,7 @@ const Ticket: FunctionComponent<Props> = ({ ticket }) => {
   const ref = useRef(null);
   const animatedOnceRef = useRef<boolean>(false);
   const [link, setLink] = useState<string>();
-  const { initialLink, isLoading } = useInitialQRLink(ticketId);
+  const { initialLink, isLoading } = useInitialQRLink(ticket._id);
 
   useEffect(() => {
     qr.defineCustomElements(window);
@@ -91,7 +91,7 @@ const Ticket: FunctionComponent<Props> = ({ ticket }) => {
                         "Content-Type": "application/json",
                       },
                       body: JSON.stringify({
-                        ticketId: ticketId,
+                        ticketId: ticket._id,
                       }),
                       credentials: "include",
                       mode: "cors",
