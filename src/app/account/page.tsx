@@ -15,7 +15,7 @@ const AccountHome: NextPage = () => {
         </div>
       );
     } else {
-      if (data) {
+      if (data.length > 0) {
         return data.map((item, index: number) => {
           return <Ticket ticket={item} key={index}></Ticket>;
         });
