@@ -15,9 +15,6 @@ const RecentSearches: FunctionComponent = () => {
   const { data } = useRecentSearchHistory();
 
   useEffect(() => {
-    // if (isOverflown(ref.current)) setDisplayRightScroller(true);
-    // console.log(firstEl.current, lastEl.current);
-
     let options = {
       root: ref.current,
       threshold: 1.0,
@@ -25,17 +22,14 @@ const RecentSearches: FunctionComponent = () => {
     };
 
     let observer = new IntersectionObserver((entries, observer) => {
-      // console.log("OFF SCREEN!", entries);
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // console.log("ON SCREEN", entry.target);
           if (entry.target === firstEl.current) {
             setDisplayLeftScroller(false);
           } else if (entry.target === lastEl.current) {
             setDisplayRightScroller(false);
           }
         } else {
-          // console.log("OFF SCREEN", entry.target);
           if (entry.target === firstEl.current) {
             setDisplayLeftScroller(true);
           } else if (entry.target === lastEl.current) {
@@ -59,11 +53,10 @@ const RecentSearches: FunctionComponent = () => {
         <div
           className={
             displayLeftScroller
-              ? "cursor-pointer hover:opacity-90 absolute top-0 left-0 bg-white rounded-full flex justify-center items-center p-1 border-2 shadow-lg !-translate-x-[55%] m-auto bottom-0 h-max dark:bg-gray-700 dark:border-gray-600"
+              ? "hidden md:flex cursor-pointer hover:opacity-90 absolute top-0 left-0 bg-white rounded-full justify-center items-center p-1 border-2 shadow-lg !-translate-x-[55%] m-auto bottom-0 h-max dark:bg-gray-700 dark:border-gray-600"
               : "hidden"
           }
           onClick={() => {
-            // console.log("CLOCKEDD");
             if (ref.current)
               (ref.current as HTMLElement).scrollBy({
                 left: -300,
@@ -90,11 +83,10 @@ const RecentSearches: FunctionComponent = () => {
         <div
           className={
             displayRightScroller
-              ? "cursor-pointer hover:opacity-90 absolute top-0 right-0 bg-white rounded-full flex justify-center items-center p-1 border-2 shadow-lg !translate-x-[55%] m-auto bottom-0 h-max dark:bg-gray-700 dark:border-gray-600"
+              ? "hidden md:flex cursor-pointer hover:opacity-90 absolute top-0 right-0 bg-white rounded-full justify-center items-center p-1 border-2 shadow-lg !translate-x-[55%] m-auto bottom-0 h-max dark:bg-gray-700 dark:border-gray-600"
               : "hidden"
           }
           onClick={() => {
-            // console.log("CLICCKEED");
             if (ref.current)
               (ref.current as HTMLElement).scrollBy({
                 left: 300,
@@ -119,7 +111,7 @@ const RecentSearches: FunctionComponent = () => {
         </div>
 
         <ul
-          className="flex flex-nowrap overflow-x-hidden gap-x-3 mt-2"
+          className="flex flex-nowrap md:overflow-x-hidden no-scrollbar overflow-auto gap-x-3 mt-2"
           ref={ref}
         >
           {data.map((item, index) => {

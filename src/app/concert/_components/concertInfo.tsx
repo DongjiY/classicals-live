@@ -61,7 +61,7 @@ const ConcertInfo: FunctionComponent<Props> = ({ id }) => {
   } else {
     return (
       <>
-        <section className="bg-white w-full md:w-1/2 mx-auto px-4 pb-8 pt-2 font-dongji shadow dark:bg-gray-700 dark:text-white">
+        <section className="max-w-[1248px] bg-white w-full md:w-1/2 mx-auto px-4 pb-8 pt-2 font-dongji shadow dark:bg-gray-700 dark:text-white">
           <button
             className="w-max underline text-blue-400 flex items-center hover:text-blue-500 pb-4"
             onClick={() => {
@@ -164,7 +164,7 @@ const ConcertInfo: FunctionComponent<Props> = ({ id }) => {
         </section>
 
         <br></br>
-        <section className="bg-white w-full md:w-1/2 mx-auto px-4 pb-8 pt-2 font-dongji shadow dark:bg-gray-700 dark:text-white">
+        <section className="max-w-[1248px] bg-white w-full md:w-1/2 mx-auto px-4 pb-8 pt-2 font-dongji shadow dark:bg-gray-700 dark:text-white">
           <h1 className="text-lg pt-2 font-semibold">Actions</h1>
           <div className="flex flex-wrap items-center">
             <span className="-ml-[8px]">

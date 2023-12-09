@@ -237,7 +237,7 @@ const NewPerfForm: FunctionComponent = () => {
 
   return (
     <form
-      className="mx-auto w-11/12 md:w-1/2 py-8 min-h-[70vh] dark:text-white"
+      className="max-w-[1248px] mx-auto w-11/12 md:w-1/2 py-8 min-h-[70vh] dark:text-white"
       onSubmit={handleSubmit}
     >
       <h1 className="text-center font-fancy text-3xl">Add a Performance</h1>

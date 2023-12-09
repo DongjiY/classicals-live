@@ -12,11 +12,11 @@ const SearchResultsPage: NextPage = () => {
     <main>
       <Navbar />
 
-      <section className="w-11/12 md:w-1/2 mx-auto mt-4">
+      <section className="w-full max-w-[1248px] px-2 md:px-0 md:w-1/2 mx-auto mt-4">
         <SearchBar />
       </section>
 
-      <section className="w-11/12 md:w-1/2 mx-auto py-6">
+      <section className="w-full max-w-[1248px] px-2 md:px-0 md:w-1/2 mx-auto py-6">
         <ResultsRowWrapper />
       </section>
     </main>
