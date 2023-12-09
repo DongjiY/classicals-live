@@ -4,7 +4,7 @@ import Logo from "./Logo";
 export default function Footer() {
   return (
     <footer className="w-full text-gray-700 bg-gray-100 body-font mt-12 dark:bg-gray-900">
-      <div className="container flex flex-col flex-wrap px-5 py-24 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
+      <div className="max-w-[1248px] w-2/3 container flex flex-col flex-wrap px-5 py-24 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
         <div className="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left flex flex-col items-center md:block">
           <Logo />
           <p className="mt-2 text-sm text-gray-500 dark:text-white">
