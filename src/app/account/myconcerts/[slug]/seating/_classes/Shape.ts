@@ -29,7 +29,6 @@ export class Shape extends CoordinateObject {
           Math.pow(this.size / 2, 2)
         );
       case "RECT":
-        console.log(pos.x, pos.y, this.x, this.y);
         return (
           pos.x >= this.x - this.size / 2 &&
           pos.x <= this.x + this.size / 2 &&
