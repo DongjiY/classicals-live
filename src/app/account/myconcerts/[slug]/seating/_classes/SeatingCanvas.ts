@@ -8,13 +8,18 @@ export type Coordinate = {
 
 const MAX_ZOOM_OUT = 0.3;
 const MIN_ZOOM_SHOW_GRID = 2;
+const EXTENDED_GRID_SIZE = 5000;
+const GRID_SIZE = 20;
 
 export class SeatingCanvas {
   // base canvas variables
   public mode: "DEBUG" | "PROD" = "DEBUG";
   private ctx: CanvasRenderingContext2D;
   public canvas: HTMLCanvasElement;
+
+  // mouse positions
   private currMousePosition: Coordinate = { x: 0, y: 0 }; // the current alias mouse position
+  private cachedRightClickPosition: Coordinate = { x: 0, y: 0 }; // alias value
 
   // shape and drag variables
   private shapes: Array<Shape> = [
@@ -40,6 +45,12 @@ export class SeatingCanvas {
     this.canvas.width = this.canvas.clientWidth;
     this.mode = mode;
 
+    this.initializeEventListeners();
+
+    this.render(); // initial render
+  }
+
+  initializeEventListeners() {
     this.canvas.addEventListener("mousedown", (e) => this.handleMouseDown(e));
     this.canvas.addEventListener("mousemove", (e) => this.handleMouseMove(e));
     this.canvas.addEventListener("mouseup", () => this.handleMouseUp());
@@ -50,14 +61,20 @@ export class SeatingCanvas {
     this.canvas.addEventListener("drop", (e) =>
       this.handleDropShapeFromMenu(e)
     );
-    document
-      .getElementById("zoom-in")
-      ?.addEventListener("click", () => this.handleZoom(true));
-    document
-      .getElementById("zoom-out")
-      ?.addEventListener("click", () => this.handleZoom(false));
-
-    this.render(); // initial render
+    this.canvas.addEventListener("contextmenu", (e) =>
+      this.handleOpenContextMenu(e)
+    );
+    document.querySelectorAll(".zoom-in").forEach((el) => {
+      el.addEventListener("click", () => this.handleZoom(true));
+    });
+    document.querySelectorAll(".zoom-out").forEach((el) => {
+      el.addEventListener("click", () => this.handleZoom(false));
+    });
+    document.getElementById("editseat")?.addEventListener("click", (e) => {
+      this.handleContextMenuActions(e, {
+        mousePos: this.cachedRightClickPosition,
+      });
+    });
   }
 
   /**
@@ -84,11 +101,50 @@ export class SeatingCanvas {
     };
   }
 
+  handleOpenContextMenu(e: MouseEvent) {
+    e.preventDefault();
+
+    const menu = document.getElementById("customcontextmenu");
+    const baseCurrMouse = this.aliasCoordsToBase(this.currMousePosition);
+    this.cachedRightClickPosition = this.currMousePosition;
+
+    if (menu) {
+      menu.classList.add(styles.contextmenuopen);
+
+      let menuW = menu.offsetWidth! + 4;
+      let menuH = menu.offsetHeight! + 4;
+
+      if (this.canvas.height - baseCurrMouse.y < menuH) {
+        menu.style.top = this.canvas.height - menuH + "px";
+      } else {
+        menu.style.top = baseCurrMouse.y + "px";
+      }
+
+      if (this.canvas.width - baseCurrMouse.x < menuW) {
+        menu.style.left = this.canvas.width - menuW + "px";
+      } else {
+        menu.style.left = baseCurrMouse.x + "px";
+      }
+    }
+  }
+
+  handleContextMenuActions(e: MouseEvent, data: any) {
+    this.clickedShape = this.getShapeUnderCursor(data.mousePos);
+    this.render();
+  }
+
+  handleCloseContextMenu() {
+    document
+      .getElementById("customcontextmenu")
+      ?.classList.remove(styles.contextmenuopen);
+  }
+
   /**
    * On mouse down, record the current position as the start of the drag action
    * @param e The mouse event
    */
   handleMouseDown(e: MouseEvent) {
+    this.handleCloseContextMenu();
     this.canvas.style.cursor = "move";
 
     const boundingBox = this.canvas.getBoundingClientRect();
@@ -100,22 +156,7 @@ export class SeatingCanvas {
         this.baseCoordsToAlias({ x: posX, y: posY })
       );
     } else {
-      // in debug mode
-      // on first click, enable edit mode, allow dragging shape
-      // on second click, enable clicked mode, opening modal
-      if (
-        this.editShape &&
-        this.getShapeUnderCursor(this.baseCoordsToAlias({ x: posX, y: posY }))
-          ?.id === this.editShape.id
-      ) {
-        this.clickedShape = this.getShapeUnderCursor(
-          this.baseCoordsToAlias({ x: posX, y: posY })
-        );
-      } else {
-        // the canvas was clicked
-        this.clickedShape = null;
-      }
-
+      this.clickedShape = null;
       this.editShape = this.getShapeUnderCursor(
         this.baseCoordsToAlias({ x: posX, y: posY })
       );
@@ -253,7 +294,7 @@ export class SeatingCanvas {
       const shapeToAdd = new Shape(
         e.dataTransfer.getData("shapetype"),
         {
-          size: 150,
+          size: 100,
           color: "#67e8f9",
         },
         this.currMousePosition.x,
@@ -325,10 +366,51 @@ export class SeatingCanvas {
     }
   }
 
+  drawGrid() {
+    this.ctx.beginPath();
+    this.ctx.strokeStyle = "#ddd";
+
+    // Vertical gridlines
+    for (let x = -EXTENDED_GRID_SIZE; x <= EXTENDED_GRID_SIZE; x += GRID_SIZE) {
+      this.ctx.moveTo(
+        x * this.currentZoom +
+          this.canvas.width / 2 +
+          this.translate.x * this.currentZoom,
+        0
+      );
+      this.ctx.lineTo(
+        x * this.currentZoom +
+          this.canvas.width / 2 +
+          this.translate.x * this.currentZoom,
+        this.canvas.height
+      );
+    }
+
+    // Horizontal gridlines
+    for (let y = -EXTENDED_GRID_SIZE; y <= EXTENDED_GRID_SIZE; y += GRID_SIZE) {
+      this.ctx.moveTo(
+        0,
+        y * this.currentZoom +
+          this.canvas.height / 2 -
+          this.translate.y * this.currentZoom
+      );
+      this.ctx.lineTo(
+        this.canvas.width,
+        y * this.currentZoom +
+          this.canvas.height / 2 -
+          this.translate.y * this.currentZoom
+      );
+    }
+
+    this.ctx.stroke();
+  }
+
   render() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.clickedShapeActions();
+
+    if (this.currentZoom > MIN_ZOOM_SHOW_GRID) this.drawGrid();
 
     this.shapes.forEach((shape) => {
       switch (shape.type) {

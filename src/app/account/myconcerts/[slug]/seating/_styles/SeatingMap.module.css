@@ -16,3 +16,14 @@
   transition-duration: 1000ms;
   animation-timing-function: ease-out;
 }
+
+.contextmenuopen {
+  display: block !important;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.contextmenu {
+  display: hidden;
+}
