@@ -118,30 +118,72 @@ const RecentSearches: FunctionComponent = () => {
             if (index === 0) {
               return (
                 <Link href={`/results?q=${item}`} key={index} ref={firstEl}>
-                  <li className="max-w-[200px] min-w-[200px] h-[100px] border-2 dark:border-gray-600 dark:bg-gray-700/80 rounded-xl flex items-center p-2 hover:bg-red-600 group dark:hover:bg-red-700 duration-200">
+                  <li className="max-w-[200px] min-w-[200px] h-[100px] border-2 dark:border-gray-600 dark:bg-gray-700/80 rounded-xl flex items-center p-2 hover:bg-red-600 group dark:hover:bg-red-700 duration-200 relative">
                     <p className="font-modern font-semibold text-gray-600 group-hover:text-white dark:text-white text-xl whitespace-nowrap text-ellipsis max-w-[180px] min-w-[180px] overflow-x-hidden">
                       {item}
                     </p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-5 h-5 absolute top-1 right-1 text-red-600"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
                   </li>
                 </Link>
               );
             } else if (index === data.length - 1) {
               return (
                 <Link href={`/results?q=${item}`} key={index} ref={lastEl}>
-                  <li className="max-w-[200px] min-w-[200px] h-[100px] border-2 dark:border-gray-600 dark:bg-gray-700/80 rounded-xl flex items-center p-2 hover:bg-red-600 group dark:hover:bg-red-700 duration-200">
+                  <li className="max-w-[200px] min-w-[200px] h-[100px] border-2 dark:border-gray-600 dark:bg-gray-700/80 rounded-xl flex items-center p-2 hover:bg-red-600 group dark:hover:bg-red-700 duration-200 relative">
                     <p className="font-modern font-semibold text-gray-600 group-hover:text-white dark:text-white text-xl whitespace-nowrap text-ellipsis max-w-[180px] min-w-[180px] overflow-x-hidden">
                       {item}
                     </p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-5 h-5 absolute top-1 right-1 text-red-600"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
                   </li>
                 </Link>
               );
             } else {
               return (
                 <Link href={`/results?q=${item}`} key={index}>
-                  <li className="max-w-[200px] min-w-[200px] h-[100px] border-2 dark:border-gray-600 dark:bg-gray-700/80 rounded-xl flex items-center p-2 hover:bg-red-600 group dark:hover:bg-red-700 duration-200">
+                  <li className="max-w-[200px] min-w-[200px] h-[100px] border-2 dark:border-gray-600 dark:bg-gray-700/80 rounded-xl flex items-center p-2 hover:bg-red-600 group dark:hover:bg-red-700 duration-200 relative">
                     <p className="font-modern font-semibold text-gray-600 group-hover:text-white dark:text-white text-xl whitespace-nowrap text-ellipsis max-w-[180px] min-w-[180px] overflow-x-hidden">
                       {item}
                     </p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-5 h-5 absolute top-1 right-1 text-red-600"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
                   </li>
                 </Link>
               );
