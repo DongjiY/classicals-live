@@ -19,7 +19,8 @@ const MyConcertsList: FunctionComponent = () => {
     return (
       <section className="flex flex-col gap-y-2">
         {data.map((item, index) => (
-          <div
+          <Link
+            href="myconcerts/poop"
             className="bg-white rounded-lg py-6 shadow-md border-2 border-gray-100 px-6 flex justify-between"
             key={index}
           >
@@ -52,7 +53,7 @@ const MyConcertsList: FunctionComponent = () => {
               </svg>
               Scan
             </Link>
-          </div>
+          </Link>
         ))}
       </section>
     );
