@@ -53,7 +53,7 @@ export class SeatingCanvas {
   initializeEventListeners() {
     this.canvas.addEventListener("mousedown", (e) => this.handleMouseDown(e));
     this.canvas.addEventListener("mousemove", (e) => this.handleMouseMove(e));
-    this.canvas.addEventListener("mouseup", () => this.handleMouseUp());
+    this.canvas.addEventListener("mouseup", (e) => this.handleMouseUp(e));
     this.canvas.addEventListener("wheel", (e) => this.handleMouseWheel(e));
     this.canvas.addEventListener("dragover", (e) =>
       this.handleShapeDragover(e)
@@ -70,9 +70,16 @@ export class SeatingCanvas {
     document.querySelectorAll(".zoom-out").forEach((el) => {
       el.addEventListener("click", () => this.handleZoom(false));
     });
-    document.getElementById("editseat")?.addEventListener("click", (e) => {
+    document.getElementById("edit-action")?.addEventListener("click", (e) => {
       this.handleContextMenuActions(e, {
         mousePos: this.cachedRightClickPosition,
+        action: "edit",
+      });
+    });
+    document.getElementById("delete-action")?.addEventListener("click", (e) => {
+      this.handleContextMenuActions(e, {
+        mousePos: this.cachedRightClickPosition,
+        action: "delete",
       });
     });
   }
@@ -129,7 +136,20 @@ export class SeatingCanvas {
   }
 
   handleContextMenuActions(e: MouseEvent, data: any) {
-    this.clickedShape = this.getShapeUnderCursor(data.mousePos);
+    if (data.action === "edit") {
+      this.clickedShape = this.getShapeUnderCursor(data.mousePos);
+    } else if (data.action === "delete") {
+      this.clickedShape = this.getShapeUnderCursor(data.mousePos);
+      if (this.clickedShape) {
+        const index = this.shapes.indexOf(this.clickedShape);
+        console.log(index);
+        if (index > -1) {
+          this.shapes.splice(index, 1);
+        }
+      }
+      this.clickedShape = null;
+    }
+
     this.render();
   }
 
@@ -163,11 +183,13 @@ export class SeatingCanvas {
       if (this.editShape) this.canvas.style.cursor = "grabbing";
     }
 
-    this.isDragging = true;
-    this.dragStart = {
-      x: e.clientX,
-      y: e.clientY,
-    };
+    if (e.button === 0) {
+      this.isDragging = true;
+      this.dragStart = {
+        x: e.clientX,
+        y: e.clientY,
+      };
+    }
 
     this.render();
   }
@@ -209,9 +231,11 @@ export class SeatingCanvas {
   /**
    * Handle cleanup when mouse is released
    */
-  handleMouseUp() {
-    this.isDragging = false;
-    this.canvas.style.cursor = "grab";
+  handleMouseUp(e: MouseEvent) {
+    if (e.button === 0) {
+      this.isDragging = false;
+      this.canvas.style.cursor = "grab";
+    }
   }
 
   /**
