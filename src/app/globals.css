@@ -21,7 +21,6 @@ body {
 }
 
 body {
-  overscroll-behavior-y: none;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -41,4 +40,8 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.no-overscroll {
+  overscroll-behavior-y: none;
 }

@@ -377,7 +377,7 @@ const FullCalendar: FunctionComponent = () => {
     );
   } else {
     return (
-      <div className="font-modern w-full overflow-x-auto bg-offwhite dark:bg-gray-100 md:bg-white mx-auto relative overflow-y-hidden">
+      <div className="font-modern w-full overflow-x-auto bg-offwhite dark:bg-gray-100 md:bg-white mx-auto relative overflow-y-hidden no-overscroll">
         <section ref={topSection}>
           <div className="flex justify-between items-end">
             <h1 className="text-2xl font-bold px-2 pt-2">
