@@ -4,7 +4,7 @@ import FullCalendar from "./_components/FullCalendar";
 
 const CalendarPage: NextPage = () => {
   return (
-    <div>
+    <div className="no-overscroll">
       <Navbar />
       <FullCalendar />
     </div>
