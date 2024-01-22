@@ -29,7 +29,7 @@ const NotFound: NextPage = () => {
         </div>
         <img
           src="/images/spotlight.jpg"
-          className="absolute top-0 bottom-0 m-auto right-0"
+          className="absolute top-0 bottom-0 m-auto right-0 max-h-screen"
         ></img>
       </div>
     </main>
