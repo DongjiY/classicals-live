@@ -46,12 +46,12 @@ const FullCalendar: FunctionComponent = () => {
     }
 
     if (selectedM !== undefined && selectedY !== undefined) {
-      const { data, rows } = generateBlocks(selectedY, selectedM);
+      const { res, rows } = generateBlocks(selectedY, selectedM);
 
       setPercentHeight(100 / rows);
-      setBlocks(data);
+      setBlocks(res);
     }
-  }, [selectedM, isLoading]);
+  }, [selectedM, data]);
 
   const getCurrChips = (m: number, d: number, y: number): Array<any> => {
     let res: Array<any> = [];
@@ -60,6 +60,7 @@ const FullCalendar: FunctionComponent = () => {
       if (isUnixEpochInDay(concert._source.performanceTime, d, m, y)) {
         res.push(
           <Link
+            id={generateUUID()}
             href={`/concert/${concert._id}`}
             className="bg-purple-100 rounded m-0 p-0 pl-1 overflow-x-hidden w-full hidden md:block"
           >
@@ -76,6 +77,7 @@ const FullCalendar: FunctionComponent = () => {
           if (isUnixEpochInDay(altTime, d, m, y)) {
             res.push(
               <Link
+                id={generateUUID()}
                 href={`/concert/${concert._id}`}
                 className="bg-purple-100 rounded m-0 p-0 pl-1 overflow-x-hidden w-full hidden md:block"
               >
@@ -172,7 +174,7 @@ const FullCalendar: FunctionComponent = () => {
     year: number,
     month: number
   ): {
-    data: Array<Array<ReactElement>>;
+    res: Array<Array<ReactElement>>;
     rows: number;
   } => {
     let res: Array<Array<ReactElement>> = [];
@@ -240,7 +242,7 @@ const FullCalendar: FunctionComponent = () => {
     }
 
     return {
-      data: res,
+      res: res,
       rows: i,
     };
   };

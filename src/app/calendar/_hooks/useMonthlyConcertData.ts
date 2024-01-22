@@ -21,14 +21,12 @@ export function useMonthlyConcertData(
 
   useEffect(() => {
     if (m !== undefined && y !== undefined) {
-      console.log(m, y);
       const { start, end } = getMonthStartEndTimestamps(m, y);
       fetch(
         `https://api.classicals.live/concerts/epochrange?start=${start}&end=${end}`
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           setIsLoading(false);
           setData(data.data);
         })
