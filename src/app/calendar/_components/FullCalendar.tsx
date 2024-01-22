@@ -10,11 +10,13 @@ import {
 } from "react";
 import { useMonthlyConcertData } from "../_hooks/useMonthlyConcertData";
 import { isUnixEpochInDay, unixToTime } from "@/util/dateconverters";
+import EventBottomBar from "./EventBottomBar";
 
 const FullCalendar: FunctionComponent = () => {
   const topSection = useRef<HTMLElement>(null);
   const [blocks, setBlocks] = useState<Array<Array<ReactElement>>>();
   const [percentHeight, setPercentHeight] = useState<number>();
+  const [selectedD, setSelectedD] = useState<number>();
   const [selectedM, setSelectedM] = useState<number>();
   const [selectedY, setSelectedY] = useState<number>();
   const [today, setToday] = useState<Date>();
@@ -51,7 +53,7 @@ const FullCalendar: FunctionComponent = () => {
       setPercentHeight(100 / rows);
       setBlocks(res);
     }
-  }, [selectedM, data]);
+  }, [selectedM, selectedD, data]);
 
   const getCurrChips = (m: number, d: number, y: number): Array<any> => {
     let res: Array<{ sort: number; item: any }> = [];
@@ -143,20 +145,58 @@ const FullCalendar: FunctionComponent = () => {
       if (isWeekend) {
         return (
           <div
+            onClick={() => {
+              setSelectedD(d);
+            }}
             key={generateUUID()}
             className="basis-1/7 border-t-2 border-red-600 grow-0 overflow-y-auto relative bg-gray-100"
           >
-            <p className="font-bold text-red-600">{d}</p>
+            <div
+              className={
+                d == selectedD
+                  ? "bg-black rounded-full h-[30px] w-[30px] flex items-center justify-center sm:bg-transparent sm:h-min sm:w-min"
+                  : ""
+              }
+            >
+              <p
+                className={
+                  d == selectedD
+                    ? "text-white font-bold sm:text-red-600"
+                    : "font-bold text-red-600"
+                }
+              >
+                {d}
+              </p>
+            </div>
             <div className="gap-y-1 flex flex-col">{getCurrChips(m, d, y)}</div>
           </div>
         );
       } else {
         return (
           <div
+            onClick={() => {
+              setSelectedD(d);
+            }}
             key={generateUUID()}
             className="basis-1/7 border-t-2 border-red-600 grow-0 overflow-y-auto relative"
           >
-            <p className="font-bold text-red-600">{d}</p>
+            <div
+              className={
+                d == selectedD
+                  ? "bg-black rounded-full h-[30px] w-[30px] flex items-center justify-center sm:bg-transparent sm:h-min sm:w-min"
+                  : ""
+              }
+            >
+              <p
+                className={
+                  d == selectedD
+                    ? "text-white font-bold sm:text-red-600"
+                    : "font-bold text-red-600"
+                }
+              >
+                {d}
+              </p>
+            </div>
             <div className="gap-y-1 flex flex-col">{getCurrChips(m, d, y)}</div>
           </div>
         );
@@ -165,20 +205,58 @@ const FullCalendar: FunctionComponent = () => {
       if (isWeekend) {
         return (
           <div
+            onClick={() => {
+              setSelectedD(d);
+            }}
             key={generateUUID()}
             className="basis-1/7 border-t-2 grow-0 overflow-y-auto relative bg-gray-100"
           >
-            {d}
+            <div
+              className={
+                d == selectedD
+                  ? "bg-black rounded-full h-[30px] w-[30px] flex items-center justify-center sm:bg-transparent sm:h-min sm:w-min"
+                  : ""
+              }
+            >
+              <p
+                className={
+                  d == selectedD
+                    ? "text-white font-bold sm:text-black sm:font-normal"
+                    : ""
+                }
+              >
+                {d}
+              </p>
+            </div>
             <div className="gap-y-1 flex flex-col">{getCurrChips(m, d, y)}</div>
           </div>
         );
       } else {
         return (
           <div
+            onClick={() => {
+              setSelectedD(d);
+            }}
             key={generateUUID()}
             className="basis-1/7 border-t-2 grow-0 overflow-y-auto relative"
           >
-            {d}
+            <div
+              className={
+                d == selectedD
+                  ? "bg-black rounded-full h-[30px] w-[30px] flex items-center justify-center sm:bg-transparent sm:h-min sm:w-min"
+                  : ""
+              }
+            >
+              <p
+                className={
+                  d == selectedD
+                    ? "text-white font-bold sm:text-black sm:font-normal"
+                    : ""
+                }
+              >
+                {d}
+              </p>
+            </div>
             <div className="gap-y-1 flex flex-col">{getCurrChips(m, d, y)}</div>
           </div>
         );
@@ -269,6 +347,7 @@ const FullCalendar: FunctionComponent = () => {
       if (m === 0) {
         setSelectedY(selectedY - 1);
       }
+      setSelectedD(undefined);
       setSelectedM((m - 1 + 12) % 12);
     }
   };
@@ -279,6 +358,7 @@ const FullCalendar: FunctionComponent = () => {
       if (m === 11) {
         setSelectedY(selectedY + 1);
       }
+      setSelectedD(undefined);
       setSelectedM((m + 1) % 12);
     }
   };
@@ -297,7 +377,7 @@ const FullCalendar: FunctionComponent = () => {
     );
   } else {
     return (
-      <div className="font-modern w-full overflow-x-auto bg-offwhite md:bg-white mx-auto">
+      <div className="font-modern w-full overflow-x-auto bg-offwhite dark:bg-gray-100 md:bg-white mx-auto relative overflow-y-hidden">
         <section ref={topSection}>
           <div className="flex justify-between items-end">
             <h1 className="text-2xl font-bold px-2 pt-2">
@@ -372,6 +452,8 @@ const FullCalendar: FunctionComponent = () => {
               </div>
             ))}
         </div>
+
+        <EventBottomBar d={selectedD} m={selectedM} y={selectedY} />
       </div>
     );
   }

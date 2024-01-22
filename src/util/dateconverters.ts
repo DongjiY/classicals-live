@@ -155,3 +155,39 @@ export function isUnixEpochInDay(
 
   return isSameDay && isSameMonth && isSameYear;
 }
+
+export function getDayTimestamps(
+  dayOfYear: number,
+  month: number,
+  year: number
+): { start: number; end: number } {
+  // Ensure month is between 0 and 11
+  if (month < 0 || month > 11) {
+    throw new Error("Invalid month. Month should be between 0 and 11.");
+  }
+
+  // Ensure the day of the year is valid
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  if (dayOfYear < 1 || dayOfYear > daysInMonth) {
+    throw new Error("Invalid day of the year.");
+  }
+
+  // Create a new Date object for the specified day of the year
+  const date = new Date(year, month, dayOfYear);
+
+  // Set time to the beginning of the day (midnight)
+  date.setHours(0, 0, 0, 0);
+
+  // Create a new Date object for the end of the day (23:59:59:999)
+  const endDate = new Date(date);
+  endDate.setHours(23, 59, 59, 999);
+
+  // Get Unix timestamps
+  const startTimestamp = Math.floor(date.getTime() / 1000);
+  const endTimestamp = Math.floor(endDate.getTime() / 1000);
+
+  return {
+    start: startTimestamp,
+    end: endTimestamp,
+  };
+}
