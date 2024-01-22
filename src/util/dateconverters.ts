@@ -1,5 +1,3 @@
-import { Concert } from "@/types/concert";
-
 export const unixToDate = (
   unix: number,
   options?: {
@@ -106,4 +104,54 @@ export function getEndOfWeekUnixTime() {
   endOfWeek.setDate(endOfWeek.getDate() + (6 - endOfWeek.getDay())); // Set to the end of the week
 
   return Math.floor(endOfWeek.getTime() / 1000); // Convert to Unix epoch time (in seconds)
+}
+
+export function getMonthStartEndTimestamps(
+  month: number,
+  year: number
+): { start: number; end: number } {
+  // Ensure month is between 0 and 11
+  if (month < 0 || month > 11) {
+    throw new Error("Invalid month. Month should be between 0 and 11.");
+  }
+
+  // Create a new Date object for the first day of the specified month
+  const startDate = new Date(year, month, 1);
+
+  // Calculate the last day of the month
+  const lastDay = new Date(year, month + 1, 0).getDate();
+
+  // Create a new Date object for the last day of the specified month
+  const endDate = new Date(year, month, lastDay, 23, 59, 59, 999);
+
+  // Get Unix timestamps
+  const startTimestamp = Math.floor(startDate.getTime() / 1000);
+  const endTimestamp = Math.floor(endDate.getTime() / 1000);
+
+  return {
+    start: startTimestamp,
+    end: endTimestamp,
+  };
+}
+
+export function isUnixEpochInDay(
+  unixEpoch: number,
+  day: number,
+  month: number,
+  year: number
+): boolean {
+  // Ensure month is between 0 and 11
+  if (month < 0 || month > 11) {
+    throw new Error("Invalid month. Month should be between 0 and 11.");
+  }
+
+  // Create a Date object from the Unix epoch timestamp
+  const date = new Date(unixEpoch * 1000);
+
+  // Check if the date matches the specified day, month, and year
+  const isSameDay = date.getDate() === day;
+  const isSameMonth = date.getMonth() === month; // Months are zero-based
+  const isSameYear = date.getFullYear() === year;
+
+  return isSameDay && isSameMonth && isSameYear;
 }
