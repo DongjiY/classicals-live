@@ -43,7 +43,6 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
   const handleDrag = (e: TouchEvent) => {
     const currPos = e.touches.item(0)?.clientY ?? 0;
     const distance = startDragPos - currPos;
-    console.log(currPos, startDragPos, distance);
     const newH = Math.max(minH, Math.min(maxH, lastStableH + distance));
     if (draggableArea.current?.contains(e.target as Node) === true) {
       draggableArea.current!.style.height = `${newH}px`;
