@@ -74,6 +74,10 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
     e.preventDefault();
   };
 
+  const disablePropagation = (e: any) => {
+    e.stopPropagation();
+  };
+
   useEffect(() => {
     document.addEventListener("touchstart", handleDragStart);
     document.addEventListener("touchend", handleDragEnd);
@@ -109,12 +113,9 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
           <ul
             className="flex flex-col border-t-2 overflow-y-auto"
             style={{ maxHeight: maxH - 100 }}
-            onTouchStart={(e) => {
-              e.stopPropagation();
-            }}
-            onTouchMove={(e) => {
-              e.stopPropagation();
-            }}
+            onTouchStart={disablePropagation}
+            onTouchMove={disablePropagation}
+            onTouchEnd={disablePropagation}
           >
             {data.map((concert) => {
               let nodes = [];
