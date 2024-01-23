@@ -111,7 +111,7 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
         <br></br>
         {data.length > 0 ? (
           <ul
-            className="flex flex-col border-t-2 overflow-y-auto"
+            className="flex flex-col border-t-2 overflow-y-auto no-scrollbar"
             style={{ maxHeight: maxH - 100 }}
             onTouchStart={disablePropagation}
             onTouchMove={disablePropagation}
