@@ -112,7 +112,7 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
           Events On {MONTHS[m]} {d}
         </h1>
         <br></br>
-        {true ? (
+        {data.length > 0 ? (
           <ul
             ref={ignoreDragArea}
             className="flex flex-col border-t-2 overflow-y-auto no-scrollbar"
