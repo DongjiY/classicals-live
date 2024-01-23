@@ -38,9 +38,9 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
     const currPos = e.touches.item(0)?.clientY ?? 0;
     if (
       draggableArea.current?.contains(e.target as Node) &&
-      !ignoreDragArea.current?.contains(e.target as Node)
+      (data.length === 0 || ignoreDragArea.current?.scrollTop === 0)
     ) {
-      draggableArea.current.style.transitionDuration = "0ms";
+      draggableArea.current!.style.transitionDuration = "0ms";
       startDragPos = currPos;
     }
   };
@@ -51,7 +51,7 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
     const newH = Math.max(minH, Math.min(maxH, lastStableH + distance));
     if (
       draggableArea.current?.contains(e.target as Node) &&
-      !ignoreDragArea.current?.contains(e.target as Node)
+      (data.length === 0 || ignoreDragArea.current?.scrollTop === 0)
     ) {
       draggableArea.current!.style.height = `${newH}px`;
     }
@@ -62,14 +62,14 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
       draggableArea.current &&
       draggableArea.current.clientHeight >= (maxH - minH) * 0.5
     ) {
-      draggableArea.current.style.transitionDuration = "800ms";
+      draggableArea.current.style.transitionDuration = "300ms";
       draggableArea.current.style.height = `${maxH}px`;
       lastStableH = maxH;
     } else if (
       draggableArea.current &&
       draggableArea.current.clientHeight < (maxH - minH) * 0.5
     ) {
-      draggableArea.current.style.transitionDuration = "800ms";
+      draggableArea.current.style.transitionDuration = "300ms";
       draggableArea.current.style.height = `${minH}px`;
       lastStableH = minH;
     } else {
@@ -101,7 +101,7 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
     return (
       <div
         ref={draggableArea}
-        className="absolute bg-white z-[1000] bottom-0 w-full rounded-t-xl sm:hidden py-2 font-modern"
+        className="absolute bg-white z-[20] bottom-0 w-full rounded-t-xl sm:hidden py-2 font-modern"
         style={{
           height: minH,
           boxShadow: "0rem -1px 7px #ccc",
@@ -115,7 +115,7 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
         {data.length > 0 ? (
           <ul
             ref={ignoreDragArea}
-            className="flex flex-col border-t-2 overflow-y-auto no-scrollbar"
+            className="flex flex-col border-t-2 overflow-y-auto no-scrollbar overscroll-none"
             style={{ maxHeight: maxH - 100 }}
           >
             {data.map((concert) => {

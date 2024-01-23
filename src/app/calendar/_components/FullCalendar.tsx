@@ -64,7 +64,7 @@ const FullCalendar: FunctionComponent = () => {
           sort: concert._source.performanceTime,
           item: (
             <Link
-              id={generateUUID()}
+              key={generateUUID()}
               href={`/concert/${concert._id}`}
               className="bg-purple-100 rounded m-0 p-0 pl-1 overflow-x-hidden w-full hidden md:block"
             >
@@ -84,7 +84,7 @@ const FullCalendar: FunctionComponent = () => {
               sort: altTime,
               item: (
                 <Link
-                  id={generateUUID()}
+                  key={generateUUID()}
                   href={`/concert/${concert._id}`}
                   className="bg-purple-100 rounded m-0 p-0 pl-1 overflow-x-hidden w-full hidden md:block"
                 >
