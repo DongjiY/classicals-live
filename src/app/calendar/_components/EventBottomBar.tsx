@@ -26,6 +26,7 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
     "December",
   ];
 
+  const ignoreDragArea = useRef<HTMLUListElement>(null);
   const draggableArea = useRef<HTMLDivElement>(null);
   const minH = 60;
   const maxH = window.innerHeight * 0.7;
@@ -35,7 +36,10 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
 
   const handleDragStart = (e: TouchEvent) => {
     const currPos = e.touches.item(0)?.clientY ?? 0;
-    if (draggableArea.current?.contains(e.target as Node) === true) {
+    if (
+      draggableArea.current?.contains(e.target as Node) === true &&
+      ignoreDragArea.current?.contains(e.target as Node) === false
+    ) {
       draggableArea.current.style.transitionDuration = "0ms";
       startDragPos = currPos;
     }
@@ -45,7 +49,10 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
     const currPos = e.touches.item(0)?.clientY ?? 0;
     const distance = startDragPos - currPos;
     const newH = Math.max(minH, Math.min(maxH, lastStableH + distance));
-    if (draggableArea.current?.contains(e.target as Node) === true) {
+    if (
+      draggableArea.current?.contains(e.target as Node) === true &&
+      ignoreDragArea.current?.contains(e.target as Node) === false
+    ) {
       draggableArea.current!.style.height = `${newH}px`;
     }
   };
@@ -53,7 +60,7 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
   const handleDragEnd = () => {
     if (
       draggableArea.current &&
-      draggableArea.current.clientHeight > (maxH - minH) * 0.8
+      draggableArea.current.clientHeight >= (maxH - minH) * 0.5
     ) {
       draggableArea.current.style.transitionDuration = "800ms";
       draggableArea.current.style.height = `${maxH}px`;
@@ -72,10 +79,6 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
 
   const disableCtxtMenu = (e: any) => {
     e.preventDefault();
-  };
-
-  const disablePropagation = (e: any) => {
-    e.nativeEvent.stopPropagation();
   };
 
   useEffect(() => {
@@ -109,13 +112,11 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
           Events On {MONTHS[m]} {d}
         </h1>
         <br></br>
-        {data.length > 0 ? (
+        {true ? (
           <ul
+            ref={ignoreDragArea}
             className="flex flex-col border-t-2 overflow-y-auto no-scrollbar"
             style={{ maxHeight: maxH - 100 }}
-            onTouchStart={disablePropagation}
-            onTouchMove={disablePropagation}
-            onTouchEnd={disablePropagation}
           >
             {data.map((concert) => {
               let nodes = [];
