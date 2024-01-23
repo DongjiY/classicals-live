@@ -109,6 +109,12 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
           <ul
             className="flex flex-col border-t-2 overflow-y-auto"
             style={{ maxHeight: maxH - 100 }}
+            onTouchStart={(e) => {
+              e.stopPropagation();
+            }}
+            onTouchMove={(e) => {
+              e.stopPropagation();
+            }}
           >
             {data.map((concert) => {
               let nodes = [];
