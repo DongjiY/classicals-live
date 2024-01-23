@@ -75,7 +75,7 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
   };
 
   const disablePropagation = (e: any) => {
-    e.stopPropagation();
+    e.nativeEvent.stopPropagation();
   };
 
   useEffect(() => {
