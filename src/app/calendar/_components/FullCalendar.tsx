@@ -440,7 +440,7 @@ const FullCalendar: FunctionComponent = () => {
             <div className="basis-1/7 text-xl">Sat</div>
           </div>
         </section>
-        <div className="h-[calc(100vh-168px)]">
+        <div className="h-[calc(100dvh-168px)]">
           {blocks &&
             blocks.map((children) => (
               <div
