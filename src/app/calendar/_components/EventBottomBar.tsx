@@ -36,6 +36,7 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
   const handleDragStart = (e: TouchEvent) => {
     const currPos = e.touches.item(0)?.clientY ?? 0;
     if (draggableArea.current?.contains(e.target as Node) === true) {
+      draggableArea.current.style.transitionDuration = "0ms";
       startDragPos = currPos;
     }
   };
@@ -50,7 +51,23 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
   };
 
   const handleDragEnd = () => {
-    lastStableH = draggableArea.current?.clientHeight ?? 0;
+    if (
+      draggableArea.current &&
+      draggableArea.current.clientHeight > (maxH - minH) * 0.8
+    ) {
+      draggableArea.current.style.transitionDuration = "800ms";
+      draggableArea.current.style.height = `${maxH}px`;
+      lastStableH = maxH;
+    } else if (
+      draggableArea.current &&
+      draggableArea.current.clientHeight < (maxH - minH) * 0.5
+    ) {
+      draggableArea.current.style.transitionDuration = "800ms";
+      draggableArea.current.style.height = `${minH}px`;
+      lastStableH = minH;
+    } else {
+      lastStableH = draggableArea.current?.clientHeight ?? 0;
+    }
   };
 
   const disableCtxtMenu = (e: any) => {
