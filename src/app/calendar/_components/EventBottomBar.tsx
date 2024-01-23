@@ -37,8 +37,8 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
   const handleDragStart = (e: TouchEvent) => {
     const currPos = e.touches.item(0)?.clientY ?? 0;
     if (
-      draggableArea.current?.contains(e.target as Node) === true &&
-      ignoreDragArea.current?.contains(e.target as Node) === false
+      draggableArea.current?.contains(e.target as Node) &&
+      !ignoreDragArea.current?.contains(e.target as Node)
     ) {
       draggableArea.current.style.transitionDuration = "0ms";
       startDragPos = currPos;
@@ -50,8 +50,8 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
     const distance = startDragPos - currPos;
     const newH = Math.max(minH, Math.min(maxH, lastStableH + distance));
     if (
-      draggableArea.current?.contains(e.target as Node) === true &&
-      ignoreDragArea.current?.contains(e.target as Node) === false
+      draggableArea.current?.contains(e.target as Node) &&
+      !ignoreDragArea.current?.contains(e.target as Node)
     ) {
       draggableArea.current!.style.height = `${newH}px`;
     }
