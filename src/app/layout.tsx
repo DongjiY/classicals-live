@@ -17,10 +17,6 @@ export const metadata: Metadata = {
       url: "https://www.linkedin.com/in/dongjiy/",
     },
   ],
-  icons: [
-    { rel: "apple-touch-icon", url: "icons/Icon-196x196.png" },
-    { rel: "icon", url: "icons/Icon-196x196.png" },
-  ],
 };
 export const viewport: Viewport = {
   themeColor: "#ffffff",
