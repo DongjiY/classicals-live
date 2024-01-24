@@ -28,11 +28,11 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
 
   const ignoreDragArea = useRef<HTMLUListElement>(null);
   const draggableArea = useRef<HTMLDivElement>(null);
-  const minH = 60;
+  const minH = 40;
   const maxH = window.innerHeight * 0.7;
 
   let startDragPos = 0;
-  let lastStableH = minH;
+  let lastStableH = maxH;
 
   const handleDragStart = (e: TouchEvent) => {
     const currPos = e.touches.item(0)?.clientY ?? 0;
@@ -48,11 +48,14 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
   const handleDrag = (e: TouchEvent) => {
     const currPos = e.touches.item(0)?.clientY ?? 0;
     const distance = startDragPos - currPos;
+    console.log(distance, lastStableH, maxH);
     const newH = Math.max(minH, Math.min(maxH, lastStableH + distance));
+    console.log(newH);
     if (
       draggableArea.current?.contains(e.target as Node) &&
       (data.length === 0 || ignoreDragArea.current?.scrollTop === 0)
     ) {
+      console.log(newH);
       draggableArea.current!.style.height = `${newH}px`;
     }
   };
@@ -60,20 +63,20 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
   const handleDragEnd = () => {
     if (
       draggableArea.current &&
-      draggableArea.current.clientHeight >= (maxH - minH) * 0.5
+      draggableArea.current.clientHeight >= (maxH - minH) * 0.6
     ) {
       draggableArea.current.style.transitionDuration = "300ms";
       draggableArea.current.style.height = `${maxH}px`;
       lastStableH = maxH;
     } else if (
       draggableArea.current &&
-      draggableArea.current.clientHeight < (maxH - minH) * 0.5
+      draggableArea.current.clientHeight < (maxH - minH) * 0.6
     ) {
       draggableArea.current.style.transitionDuration = "300ms";
       draggableArea.current.style.height = `${minH}px`;
       lastStableH = minH;
     } else {
-      lastStableH = draggableArea.current?.clientHeight ?? 0;
+      lastStableH = draggableArea.current?.clientHeight ?? maxH;
     }
   };
 
@@ -97,6 +100,12 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
 
   const { data, isLoading } = useDailyConcertData(d, m, y);
 
+  useEffect(() => {
+    if (!isLoading && draggableArea.current) {
+      draggableArea.current.style.height = `${maxH}px`;
+    }
+  }, [isLoading]);
+
   if (d !== undefined && m !== undefined && y !== undefined) {
     return (
       <div
@@ -104,6 +113,7 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
         className="absolute bg-white z-[20] bottom-0 w-full rounded-t-xl sm:hidden py-2 font-modern"
         style={{
           height: minH,
+          transitionDuration: "400ms",
           boxShadow: "0rem -1px 7px #ccc",
         }}
       >
