@@ -453,7 +453,12 @@ const FullCalendar: FunctionComponent = () => {
             ))}
         </div>
 
-        <EventBottomBar d={selectedD} m={selectedM} y={selectedY} />
+        <EventBottomBar
+          key={JSON.stringify([selectedD, selectedM, selectedY])}
+          d={selectedD}
+          m={selectedM}
+          y={selectedY}
+        />
       </div>
     );
   }
