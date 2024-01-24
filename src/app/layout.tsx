@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
@@ -8,6 +8,26 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Classicals Live",
   description: "Find Concerts Near You",
+  generator: "Next.js",
+  manifest: "/manifest.json",
+  authors: [
+    { name: "Dongji Yang" },
+    {
+      name: "Dongji Yang",
+      url: "https://www.linkedin.com/in/dongjiy/",
+    },
+  ],
+  icons: [
+    { rel: "apple-touch-icon", url: "icons/Icon-196x196.png" },
+    { rel: "icon", url: "icons/Icon-196x196.png" },
+  ],
+};
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+  minimumScale: 1,
+  initialScale: 1,
+  width: "deviceWidth",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
