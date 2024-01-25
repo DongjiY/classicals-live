@@ -50,10 +50,6 @@ body {
     scrollbar-width: none; /* Firefox */
   }
 
-  body {
-    padding-bottom: 16px;
-  }
-
   body::-webkit-scrollbar {
     display: none;
   }
