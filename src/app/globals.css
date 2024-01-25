@@ -55,7 +55,7 @@ body {
   }
 
   .pwa-hidden {
-    display: none;
+    display: none !important;
   }
 
   .pwa-rounded-full {
