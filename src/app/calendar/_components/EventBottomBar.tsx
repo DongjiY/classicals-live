@@ -110,7 +110,7 @@ const EventBottomBar: FunctionComponent<Props> = ({ d, m, y }) => {
         className="absolute bg-white z-[20] bottom-0 w-full rounded-t-xl sm:hidden py-2 font-modern"
         style={{
           height: minH,
-          transitionDuration: "400ms",
+          transitionDuration: "300ms",
           boxShadow: "0rem -1px 7px #ccc",
         }}
       >

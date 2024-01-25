@@ -16,6 +16,9 @@ export default function Navbar() {
           <Link href="/" className="font-semibold hover:text-red-600">
             Home
           </Link>
+          <Link href="/calendar" className="font-semibold hover:text-red-600">
+            Calendar
+          </Link>
           <Link href="/contact" className="font-semibold hover:text-red-600">
             Contact
           </Link>
@@ -74,6 +77,14 @@ export default function Navbar() {
             <li>
               <Link href="/" className="font-semibold hover:text-red-600">
                 Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/calendar"
+                className="font-semibold hover:text-red-600"
+              >
+                Calendar
               </Link>
             </li>
             <li>
