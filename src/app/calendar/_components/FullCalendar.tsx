@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   FunctionComponent,
   ReactElement,
+  SyntheticEvent,
   useEffect,
   useRef,
   useState,
@@ -379,6 +380,30 @@ const FullCalendar: FunctionComponent = () => {
     setSelectedY(d.getFullYear());
   };
 
+  let startX = 0;
+  let alreadySwiped = false;
+
+  const handleSwipeStart = (e: any) => {
+    startX = e.touches.item(0)?.clientX ?? 0;
+  };
+
+  const handleSwipeX = (e: any) => {
+    const currX = e.touches.item(0)?.clientX ?? 0;
+    const distance = startX - currX;
+    if (Math.abs(distance) > (window.innerWidth * 2) / 3 && !alreadySwiped) {
+      if (distance < 0) {
+        prevMonth();
+      } else {
+        nextMonth();
+      }
+      alreadySwiped = true;
+    }
+  };
+
+  const handleSwipeStop = () => {
+    alreadySwiped = false;
+  };
+
   if (isLoading) {
     return (
       <div className="w-full h-[100dvh] flex items-center justify-center bg-white">
@@ -450,7 +475,12 @@ const FullCalendar: FunctionComponent = () => {
             <div className="basis-1/7 text-xl">Sat</div>
           </div>
         </section>
-        <div className="h-[calc(100dvh-168px)]">
+        <div
+          className="h-[calc(100dvh-168px)] calendar-pwa"
+          onTouchStart={handleSwipeStart}
+          onTouchMove={handleSwipeX}
+          onTouchEnd={() => handleSwipeStop()}
+        >
           {blocks &&
             blocks.map((children) => (
               <div

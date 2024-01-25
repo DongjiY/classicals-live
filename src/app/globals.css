@@ -55,6 +55,23 @@ body {
   }
 
   .pwa-hidden {
-    display: none;
+    display: none !important;
+  }
+
+  .pwa-visible {
+    display: block !important;
+    position: relative !important;
+  }
+
+  .pwa-rounded-full {
+    border-radius: 9999px !important;
+  }
+
+  .calendar-pwa {
+    height: calc(90dvh - 84px) !important;
+  }
+
+  .pwa-screen-split-a {
+    height: 90dvh;
   }
 }
