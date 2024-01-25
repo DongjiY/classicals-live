@@ -8,7 +8,7 @@ export default function Navbar() {
   const { user, isLoading, error } = useUser();
 
   return (
-    <nav className="w-full bg-white border-b-[1px] dark:border-none border-gray-300 py-4 dark:bg-gray-900 z-10">
+    <nav className="w-full bg-white border-b-[1px] dark:border-none border-gray-300 py-4 dark:bg-gray-900 z-10 pwa-hidden hidden">
       <div className="w-full max-w-[1248px] pl-4 md:pl-0 md:w-2/3 mx-auto flex items-center justify-between">
         <Logo />
 

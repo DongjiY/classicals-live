@@ -56,7 +56,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                 <p>Concerts</p>
               </Link>
             </li>
-            <li>
+            <li className="pwa-hidden">
               <Link
                 href="/"
                 className="flex flex-col gap-x-1 items-center flex-wrap"

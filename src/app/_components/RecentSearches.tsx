@@ -4,7 +4,10 @@ import { FunctionComponent, useEffect, useRef, useState } from "react";
 import useRecentSearchHistory from "../_hooks/useRecentSearchHistory";
 import Link from "next/link";
 
-const RecentSearches: FunctionComponent = () => {
+type Props = {
+  bannerTextSize: "small" | "large";
+};
+const RecentSearches: FunctionComponent<Props> = ({ bannerTextSize }) => {
   const ref = useRef(null);
   const firstEl = useRef(null);
   const lastEl = useRef(null);
@@ -45,7 +48,13 @@ const RecentSearches: FunctionComponent = () => {
 
   return (
     <div className={data.length <= 0 ? "hidden" : "block"}>
-      <h1 className="font-modern font-bold text-2xl dark:text-white">
+      <h1
+        className={
+          bannerTextSize === "large"
+            ? "font-modern font-bold text-2xl dark:text-white"
+            : "font-modern font-bold dark:text-white"
+        }
+      >
         Recent Searches
       </h1>
 

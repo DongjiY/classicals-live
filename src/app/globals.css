@@ -50,11 +50,23 @@ body {
     scrollbar-width: none; /* Firefox */
   }
 
+  body {
+    padding-bottom: 16px;
+  }
+
   body::-webkit-scrollbar {
     display: none;
   }
 
   .pwa-hidden {
     display: none;
+  }
+
+  .pwa-rounded-full {
+    border-radius: 9999px !important;
+  }
+
+  .calendar-pwa {
+    height: calc(90dvh - 84px) !important;
   }
 }

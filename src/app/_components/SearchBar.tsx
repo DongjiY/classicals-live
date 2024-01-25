@@ -59,13 +59,13 @@ const SearchBar: FunctionComponent = () => {
           type="search"
           id="default-search"
           name="searchInput"
-          className="block p-4 pl-10 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:text-black dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="block p-4 pl-10 w-full text-sm text-gray-900 bg-white rounded-lg pwa-rounded-full border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:text-black dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Search Composers, Pieces, and Artists..."
           required
         />
         <button
           type="submit"
-          className="text-white absolute right-2.5 bottom-2.5 bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full md:rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-800 dark:focus:ring-blue-800"
+          className="text-white absolute right-2.5 bottom-2.5 bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full md:rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-800 dark:focus:ring-blue-800 pwa-hidden"
         >
           <span className="hidden md:block">Explore</span>
           <span className="md:hidden">Go</span>

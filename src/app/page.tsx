@@ -24,7 +24,7 @@ const Home: NextPage = () => {
       </section>
 
       <section className="w-full px-3 md:px-0 max-w-[1248px] md:w-2/3 mx-auto pb-8 pt-8 md:pt-2">
-        <RecentSearches />
+        <RecentSearches bannerTextSize="large" />
       </section>
 
       <section className="w-full px-3 md:px-0 max-w-[1248px] md:w-2/3 mx-auto overflow-x-hidden">
