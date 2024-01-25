@@ -16,10 +16,15 @@ const FullCalendar: FunctionComponent = () => {
   const topSection = useRef<HTMLElement>(null);
   const [blocks, setBlocks] = useState<Array<Array<ReactElement>>>();
   const [percentHeight, setPercentHeight] = useState<number>();
+  const [shouldEventBarRerender, setShouldEventBarRerender] = useState<any>();
   const [selectedD, setSelectedD] = useState<number>();
   const [selectedM, setSelectedM] = useState<number>();
   const [selectedY, setSelectedY] = useState<number>();
   const [today, setToday] = useState<Date>();
+
+  useEffect(() => {
+    setShouldEventBarRerender(generateUUID());
+  }, [selectedD, selectedM, selectedY]);
 
   const { data, isLoading } = useMonthlyConcertData(selectedM, selectedY);
 
@@ -141,12 +146,17 @@ const FullCalendar: FunctionComponent = () => {
     const t = new Date(y, m, d);
     const isWeekend = t.getDay() === 0 || t.getDay() === 6;
 
+    const changeDayWrapper = (d: number) => {
+      setShouldEventBarRerender(generateUUID());
+      setSelectedD(d);
+    };
+
     if (isToday) {
       if (isWeekend) {
         return (
           <div
             onClick={() => {
-              setSelectedD(d);
+              changeDayWrapper(d);
             }}
             key={generateUUID()}
             className="basis-1/7 border-t-2 border-red-600 grow-0 overflow-y-auto relative bg-gray-100"
@@ -175,7 +185,7 @@ const FullCalendar: FunctionComponent = () => {
         return (
           <div
             onClick={() => {
-              setSelectedD(d);
+              changeDayWrapper(d);
             }}
             key={generateUUID()}
             className="basis-1/7 border-t-2 border-red-600 grow-0 overflow-y-auto relative"
@@ -206,7 +216,7 @@ const FullCalendar: FunctionComponent = () => {
         return (
           <div
             onClick={() => {
-              setSelectedD(d);
+              changeDayWrapper(d);
             }}
             key={generateUUID()}
             className="basis-1/7 border-t-2 grow-0 overflow-y-auto relative bg-gray-100"
@@ -235,7 +245,7 @@ const FullCalendar: FunctionComponent = () => {
         return (
           <div
             onClick={() => {
-              setSelectedD(d);
+              changeDayWrapper(d);
             }}
             key={generateUUID()}
             className="basis-1/7 border-t-2 grow-0 overflow-y-auto relative"
@@ -371,7 +381,7 @@ const FullCalendar: FunctionComponent = () => {
 
   if (isLoading) {
     return (
-      <div className="w-full h-screen flex items-center justify-center bg-white">
+      <div className="w-full h-[100dvh] flex items-center justify-center bg-white">
         <img src="/assets/90-ring-with-bg.svg"></img>
       </div>
     );
@@ -454,7 +464,7 @@ const FullCalendar: FunctionComponent = () => {
         </div>
 
         <EventBottomBar
-          key={JSON.stringify([selectedD, selectedM, selectedY])}
+          key={shouldEventBarRerender}
           d={selectedD}
           m={selectedM}
           y={selectedY}
