@@ -59,7 +59,7 @@ body {
   }
 
   .pwa-visible {
-    display: block !important;
+    display: flex !important;
     position: relative !important;
   }
 
