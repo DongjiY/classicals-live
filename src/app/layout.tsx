@@ -18,6 +18,8 @@ export const metadata: Metadata = {
     },
   ],
   appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
     title: "Classicals Live",
     startupImage: [
       {
