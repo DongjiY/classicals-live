@@ -217,9 +217,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <div className={inter.className}>
         <PWABottomBar>{children}</PWABottomBar>
-      </body>
+      </div>
       <Script
         async
         src="https://analytics.eu.umami.is/script.js"

@@ -63,6 +63,10 @@ body {
     position: relative !important;
   }
 
+  .pwa-visible-block {
+    display: block !important;
+  }
+
   .pwa-rounded-full {
     border-radius: 9999px !important;
   }

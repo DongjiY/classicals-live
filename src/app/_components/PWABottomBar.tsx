@@ -6,9 +6,9 @@ const PWABottomBar: FunctionComponent<{ children: ReactNode }> = ({
 }) => {
   return (
     <>
-      <div className="pwa-screen-split-a overflow-y-scroll">{children}</div>
+      <body className="pwa-screen-split-a overflow-y-scroll">{children}</body>
       <div className="hidden pwa-visible bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-200 flex justify-evenly h-[10dvh] z-[1000] relative pt-3 shadow-top dark:shadow-none">
-        <Link href="/mobile/search">
+        <Link href="/">
           <div className="flex flex-col items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
