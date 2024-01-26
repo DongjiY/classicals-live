@@ -2,11 +2,13 @@
 import { useRouter } from "next/navigation";
 import { FunctionComponent, useState } from "react";
 
+type ValidIndex = 0 | 1 | 2;
+
 const BottomNavigationBar: FunctionComponent = () => {
   const router = useRouter();
-  const [iconIndex, setIconIndex] = useState<0 | 1 | 2>(0);
+  const [iconIndex, setIconIndex] = useState<ValidIndex>(0);
 
-  const handleSelectScreen = (a: 0 | 1 | 2) => {
+  const handleSelectScreen = (a: ValidIndex) => {
     switch (a) {
       case 0:
         router.push("/");
