@@ -45,13 +45,14 @@ body {
 @media (display-mode: standalone) {
   html,
   body {
-    overscroll-behavior-y: contain;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    overscroll-behavior-y: none !important;
+    overscroll-behavior-x: none !important;
+    -ms-overflow-style: none !important; /* IE and Edge */
+    scrollbar-width: none !important; /* Firefox */
   }
 
   body::-webkit-scrollbar {
-    display: none;
+    display: none !important;
   }
 
   .pwa-hidden {
