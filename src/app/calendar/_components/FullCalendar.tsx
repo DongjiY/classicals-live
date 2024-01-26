@@ -390,7 +390,7 @@ const FullCalendar: FunctionComponent = () => {
   const handleSwipeX = (e: any) => {
     const currX = e.touches.item(0)?.clientX ?? 0;
     const distance = startX - currX;
-    if (Math.abs(distance) > (window.innerWidth * 2) / 3 && !alreadySwiped) {
+    if (Math.abs(distance) > window.innerWidth * 0.35 && !alreadySwiped) {
       if (distance < 0) {
         prevMonth();
       } else {
